@@ -10,6 +10,7 @@ namespace SpaceGame
     {
         static void Main(string[] args)
         {
+
         }
     }
 }
