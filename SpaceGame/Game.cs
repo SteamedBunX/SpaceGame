@@ -13,6 +13,9 @@ namespace SpaceGame
         List<Planet> planets = new List<Planet>();
         Random r = new Random();
         Player player;
+        ObjectHandler obs = new ObjectHandler();
+
+
         public void ini()
         {
             Console.Write("Please enter your player's name: ");

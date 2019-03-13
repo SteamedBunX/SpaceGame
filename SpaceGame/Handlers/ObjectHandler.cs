@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SpaceGame.Handlers
+namespace SpaceGame
 {
     class ObjectHandler
     {
+
     }
 }
