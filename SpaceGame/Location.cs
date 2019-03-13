@@ -19,6 +19,12 @@ namespace SpaceGame
 
         public int getY() => y;
 
+        public void updateLocation(Location l)
+        {
+            x = l.getX();
+            y = l.getY();
+        }
+
         public override string ToString()
         {
             return $"Cordinate: ({x}, {y})";
