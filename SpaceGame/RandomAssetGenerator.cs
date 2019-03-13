@@ -14,7 +14,9 @@ namespace SpaceGame
 
         // generate planet
 
-        // generate star map
+
+
+        // generate location star map
         public List<Location> GeneratePlanetLocations(int gridSizeX, int gridSizeY, int splitFactor, int radius, int maxAmount)
         {
             List<Location> planetLocations = new List<Location>();
@@ -29,7 +31,7 @@ namespace SpaceGame
             return planetLocations;
         }
 
-        public List<Location> GeneratePlanetLocationsInGridSection(int startX, int startY, int sizeX,
+        private List<Location> GeneratePlanetLocationsInGridSection(int startX, int startY, int sizeX,
             int sizeY, int maxAmount, int radius)
         {
             List<Location> planetLocations = new List<Location>();
@@ -57,7 +59,7 @@ namespace SpaceGame
             return planetLocations;
         }
 
-        public void disableRadiusLocations(Location planet, List<Location> potentialLocations, int radius)
+        private void disableRadiusLocations(Location planet, List<Location> potentialLocations, int radius)
         {
             int cornerX = planet.getX() - radius;
             int cornerY = planet.getY() - radius;
@@ -73,7 +75,7 @@ namespace SpaceGame
             }
         }
 
-        public bool withinCircle(int x1, int y1, int x2, int y2, int r)
+        private bool withinCircle(int x1, int y1, int x2, int y2, int r)
         {
             double radius = Math.Sqrt((x1 - x2)* (x1 - x2) + (y1 - y2)*(y1 - y2)); 
             return (radius - r) < 0;

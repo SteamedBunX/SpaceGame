@@ -24,6 +24,11 @@ namespace SpaceGame
             return $"Cordinate: ({x}, {y})";
         }
 
+        public override int GetHashCode()
+        {
+            return y ^ x;
+        }
+
         public override bool Equals(object value)
         {
             if(value == null)
