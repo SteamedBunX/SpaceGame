@@ -10,11 +10,13 @@ namespace SpaceGame
     class Game
     {
 
-        ObjectHandler obs = new ObjectHandler();
+        ObjectHandler obsH = new ObjectHandler();
+        PagesHundler pgsH;
 
         public void Ini()
         {
-            obs.Ini();
+            obsH.Ini();
+            pgsH = new PagesHundler(ref obsH);
         }
 
         public void Run()
@@ -22,27 +24,45 @@ namespace SpaceGame
 
             bool exit = false;
 
+            Pages pageSwitch = Pages.MainMenu;
             while (!exit)
             {
-                Console.WriteLine($"You are current at the location: {obs.player.GetCurrentPlanet().GetLocation()}");
-                List<Planet> accessablePlanet = new List<Planet>();
-                int accessableR = 18;
-                Console.WriteLine("Current accessable planets are as follow: ");
-                int count = 0;
-                foreach (Planet p in obs.planets)
+                switch (pageSwitch)
                 {
-                    if (Calc.withinDistance(p.GetLocation(), obs.player.GetCurrentPlanet().GetLocation(), accessableR) 
-                        && p.GetLocation() != obs.player.GetCurrentPlanet().GetLocation())
-                    {
-                        count++;
-                        accessablePlanet.Add(p);
-                        Console.WriteLine($"{count}. {p.GetLocation()}");
-                    }
+                    case Pages.MainMenu:
+                        pageSwitch = pgsH.MainMenu();
+                        break;
+                    default:
+                        pageSwitch = pgsH.MainMenu();
+                        break;
                 }
-                Console.Write("Please enter the index of the planet you would like to move to");
-                int index = int.Parse(Console.ReadLine());
-                obs.player.setPlanet(accessablePlanet[index - 1]);
             }
+
+
+            //while (!exit)
+            //{
+            //    Console.WriteLine($"You are current at the location: {obs.player.GetCurrentPlanet().GetLocation()}");
+            //    List<Planet> accessablePlanet = new List<Planet>();
+            //    int accessableR = 18;
+            //    Console.WriteLine("Current accessable planets are as follow: ");
+            //    int count = 0;
+            //    foreach (Planet p in obs.planets)
+            //    {
+            //        Location currentPlyrLocation = obs.player.GetCurrentPlanet().GetLocation();
+            //        Coordi pCord = new Coordi(p.GetLocation().getX(), p.GetLocation().getY());
+            //        Coordi playerCord = new Coordi(currentPlyrLocation.getX(),currentPlyrLocation.getY());
+            //        if (Calc.withinDistance(pCord, playerCord, accessableR) 
+            //            && p.GetLocation() != obs.player.GetCurrentPlanet().GetLocation())
+            //        {
+            //            count++;
+            //            accessablePlanet.Add(p);
+            //            Console.WriteLine($"{count}. {p.GetLocation()}");
+            //        }
+            //    }
+            //    Console.Write("Please enter the index of the planet you would like to move to");
+            //    int index = int.Parse(Console.ReadLine());
+            //    obs.player.setPlanet(accessablePlanet[index - 1]);
+            //}
         }
 
 

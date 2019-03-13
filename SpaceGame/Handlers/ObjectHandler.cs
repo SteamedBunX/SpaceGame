@@ -35,7 +35,9 @@ namespace SpaceGame
             int sectionSizeX = 50;
             int sectionSizeY = 30;
             int splitFactor = 4;
-            potentialPlanetLocations = r.GeneratePlanetLocations(sectionSizeX, sectionSizeY, splitFactor, radius, 40);
+            RandomPlanetGenerationScope scope = new RandomPlanetGenerationScope(new XYPair(sectionSizeX, sectionSizeY),
+                splitFactor, radius, 40);
+            potentialPlanetLocations = r.GeneratePlanetLocations(scope);
             Console.WriteLine(potentialPlanetLocations.Count);
             Console.ReadLine();
             Bitmap bmp = new Bitmap((sectionSizeX + radius) * splitFactor * 10, (sectionSizeY + radius) * splitFactor * 10);

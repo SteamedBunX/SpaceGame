@@ -17,15 +17,20 @@ namespace SpaceGame
 
 
         // generate location star map
-        public List<Location> GeneratePlanetLocations(int gridSizeX, int gridSizeY,
-            int splitFactor, int radius, int maxAmount)
+        public List<Location> GeneratePlanetLocations(RandomPlanetGenerationScope scope)
         {
-            List<Location> planetLocations = new List<Location>();
+            int splitFactor = scope.splitFactor;
+            int gridSizeX = scope.size.x;
+            int gridSizeY = scope.size.y;
+            int radius = scope.radius;
+            int maxAmount = scope.maxAmount;
+            List <Location> planetLocations = new List<Location>();
             for(int x = 0; x < splitFactor; x++)
             {
                 for(int y = 0; y < splitFactor; y++)
                 {
-                    planetLocations.AddRange(GeneratePlanetLocationsInGridSection(x * (gridSizeX+radius), y * (gridSizeY+ radius),
+                    planetLocations.AddRange(GeneratePlanetLocationsInGridSection(x * (gridSizeX+radius),
+                        y * (gridSizeY+ radius),
                         gridSizeX, gridSizeY, maxAmount, radius));
                 }
             }
@@ -68,7 +73,9 @@ namespace SpaceGame
             {
                 for(int y = 0; y < radius*2; y++)
                 {
-                    if (Calc.withinDistance(x, y, radius, radius, radius))
+                    Coordi c1 = new Coordi(x, y);
+                    Coordi c2 = new Coordi(radius, radius);
+                    if (Calc.withinDistance(c1, c2, radius))
                     {
                         potentialLocations.Remove(new Location(cornerX + x, cornerY + y));
                     }

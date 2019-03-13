@@ -14,6 +14,11 @@ namespace SpaceGame
             x = _x;
             y = _y;
         }
+        public Location(Coordi xy)
+        {
+            x = xy.x;
+            y = xy.y;
+        }
 
         public int getX() => x;
 

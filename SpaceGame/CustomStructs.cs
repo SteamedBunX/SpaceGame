@@ -1,4 +1,4 @@
-﻿
+﻿using System;
 namespace SpaceGame
 {
     public struct XYPair
@@ -22,6 +22,20 @@ namespace SpaceGame
             splitFactor = sF;
             radius = r;
             maxAmount = mA;
+        }
+    }
+
+    public struct Coordi
+    {
+        public int x, y;
+        public Coordi(int _x,int _y)
+        {
+            x = _x;
+            y = _y;
+        }
+        public static double operator -(Coordi c1, Coordi c2)
+        {
+            return Math.Sqrt(Math.Pow((c1.x - c2.x), 2) + Math.Pow((c1.y - c2.y), 2));
         }
     }
 

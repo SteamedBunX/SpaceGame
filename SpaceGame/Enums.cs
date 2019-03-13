@@ -8,6 +8,6 @@ namespace SpaceGame
 {
 
     public enum MenuItems { Back, Select };
-    public enum Pages { MainPage, NewCharacter, Nevigate };
+    public enum Pages { MainMenu, LoadSave, NewCharacter, Credits, Nevigate, PlaceHolder };
 
 }
