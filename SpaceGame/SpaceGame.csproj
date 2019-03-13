@@ -52,6 +52,9 @@
     <Compile Include="GameObjects\Location.cs" />
     <Compile Include="GameObjects\Planet.cs" />
     <Compile Include="GameObjects\Player.cs" />
+    <Compile Include="Handlers\MenuHandlers.cs" />
+    <Compile Include="Handlers\ObjectHandler.cs" />
+    <Compile Include="Handlers\Pages.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RandomAssetGenerator.cs" />
