@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace SpaceGame
 {
-    class Pages
+    class PagesHundler
     {
+        public Pages MainPage()
+        {
+            return Pages.NewCharacter;
+        }
     }
 }

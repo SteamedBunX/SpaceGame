@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace SpaceGame
 {
-    class Enums
-    {
-        enum MenuItems { Back, Select };
-    }
+
+    public enum MenuItems { Back, Select };
+    public enum Pages { MainPage, NewCharacter, Nevigate };
+
 }

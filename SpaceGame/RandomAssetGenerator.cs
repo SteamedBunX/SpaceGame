@@ -17,7 +17,8 @@ namespace SpaceGame
 
 
         // generate location star map
-        public List<Location> GeneratePlanetLocations(int gridSizeX, int gridSizeY, int splitFactor, int radius, int maxAmount)
+        public List<Location> GeneratePlanetLocations(int gridSizeX, int gridSizeY,
+            int splitFactor, int radius, int maxAmount)
         {
             List<Location> planetLocations = new List<Location>();
             for(int x = 0; x < splitFactor; x++)
