@@ -67,7 +67,7 @@ namespace SpaceGame
             {
                 for(int y = 0; y < radius*2; y++)
                 {
-                    if (withinCircle(x, y, radius, radius, radius))
+                    if (Calc.withinDistance(x, y, radius, radius, radius))
                     {
                         potentialLocations.Remove(new Location(cornerX + x, cornerY + y));
                     }
@@ -75,11 +75,7 @@ namespace SpaceGame
             }
         }
 
-        private bool withinCircle(int x1, int y1, int x2, int y2, int r)
-        {
-            double radius = Math.Sqrt((x1 - x2)* (x1 - x2) + (y1 - y2)*(y1 - y2)); 
-            return (radius - r) < 0;
-        }
+        
 
 
     }

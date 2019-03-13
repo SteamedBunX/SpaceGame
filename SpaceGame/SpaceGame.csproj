@@ -45,6 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Calc.cs" />
+    <Compile Include="Game.cs" />
     <Compile Include="ImageHandler.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="Planet.cs" />

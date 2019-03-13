@@ -10,10 +10,16 @@ namespace SpaceGame
     {
         string name;
         Location location;
+//        bool generated;
         public Planet(Location l, string n)
         {
             name = n;
             location = l;
+        }
+
+        public Location GetLocation()
+        {
+            return location;
         }
     }
 }

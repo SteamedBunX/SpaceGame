@@ -9,21 +9,27 @@ namespace SpaceGame
     class Player
     {
         string name;
-        Location location;
-        public Player(string n, Location l)
+ //       Location location;
+        Planet currentPlanet;
+        public Player(string n, Planet p)
         {
             name = n;
-            location = l;
+            currentPlanet = p;
         }
 
-        public void setLocation(Location l)
+        public void setPlanet(Planet p)
         {
-            location.updateLocation(l);
+            currentPlanet = p;
         }
 
         public void printCurrentStatus()
         {
-            Console.WriteLine($"{name} is current at the location :{location}");
+            Console.WriteLine($"{name} is current at the location :{currentPlanet.GetLocation()}");
+        }
+
+        public Planet GetCurrentPlanet()
+        {
+            return currentPlanet;
         }
 
     }
