@@ -8,5 +8,15 @@ namespace SpaceGame
 {
     class MenuHandlers
     {
+        public void PrintMenu()
+        {
+
+        }
+
+        public void MainPageMenu()
+        {
+
+        }
+
     }
 }

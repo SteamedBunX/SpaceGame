@@ -20,6 +20,9 @@ namespace SpaceGame
                 "1: Starting a new Game\n" +
                 "2: Load Save File\n" +
                 "3: Credits");
+
+
+
             string choice = Console.ReadLine();
             switch(choice)
             {

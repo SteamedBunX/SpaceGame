@@ -28,7 +28,7 @@ namespace SpaceGame
     public struct Coordi
     {
         public int x, y;
-        public Coordi(int _x,int _y)
+        public Coordi(int _x, int _y)
         {
             x = _x;
             y = _y;
@@ -47,6 +47,30 @@ namespace SpaceGame
         {
             afterLayer = _afterLayer;
             numOfLines = _numOfLines;
+        }
+    }
+
+    public struct ShopItem
+    {
+        public int index, amount, price;
+        public ShopItem(int _index, int _amount, int _price)
+        {
+            index = _index;
+            amount = _amount;
+            price = _price;
+        }
+    }
+
+    public struct MenuItem
+    {
+        string itemName;
+        MenuPart part;
+        TextAlignment alignment;
+        public MenuItem(string _itemName, MenuPart menuPart, TextAlignment _alignment)
+        {
+            itemName = _itemName;
+            part = menuPart;
+            alignment = _alignment;
         }
     }
 
