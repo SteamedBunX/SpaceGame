@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using Console = Colorful.Console;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,7 +10,10 @@ namespace SpaceGame
 {
     class StringHandler
     {
+        int index = 0;
         List<StyledString> stringBitmap = new List<StyledString>();
+        List<StyledString> augmentingBitmap = new List<StyledString>();
+
         public void print()
         {
             sortString();
@@ -21,16 +26,23 @@ namespace SpaceGame
             stringBitmap.Clear();
         }
 
-        public void AddStyledString(int i, string t, int lyr = 0, 
-            ConsoleColor tColor = ConsoleColor.White,
-            ConsoleColor bColor = ConsoleColor.Black)
+        public void AddStyledString(string text, int lyr = 0,
+            TextColor tColor = TextColor.White,
+            TextColor bColor = TextColor.Black,
+            TextAlignment alignment = TextAlignment.LeftAligned)
         {
-            stringBitmap.Add(new StyledString(i, t, lyr, tColor, bColor));
+            stringBitmap.Add(new StyledString(index, text, lyr, tColor, bColor, alignment));
+            index++;
         }
 
         public void sortString()
         {
             stringBitmap.Sort(CompareStringByLayerIndex);
+        }
+
+        public void ClearStringBitmap()
+        {
+            stringBitmap.Clear();
         }
 
         private static int CompareStringByLayerIndex(StyledString x, StyledString y)
