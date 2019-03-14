@@ -10,20 +10,39 @@ namespace SpaceGame
 {
     class StringHandler
     {
+        List<LineSkip> lineSkips = new List<LineSkip>();
         int index = 0;
         List<StyledString> stringBitmap = new List<StyledString>();
         List<StyledString> augmentingBitmap = new List<StyledString>();
 
-        public void print()
+        public void Print()
         {
-            sortString();
-            foreach(StyledString s in stringBitmap)
+            SortString();
+            SortLineSkip();
+            List<LineSkip> lineSkipsTemp = new List<LineSkip>(lineSkips);
+            foreach (StyledString s in stringBitmap)
             {
+                if (lineSkipsTemp.Count > 0)
+                {
+                    if (s.layer > lineSkipsTemp[0].afterLayer)
+                    {
+                        for (int i = 0; i < lineSkipsTemp[0].numOfLines; i++)
+                        {
+                            Console.WriteLine();
+                        }
+                        lineSkipsTemp.RemoveAt(0);
+                    }
+                }
+                
                 Console.BackgroundColor = s.backGroundColor;
                 Console.ForegroundColor = s.textColor;
                 Console.Write(s.text);
             }
-            stringBitmap.Clear();
+        }
+
+        public void InsertLineSkip(int afterLayer, int numOfLines)
+        {
+            lineSkips.Add(new LineSkip(afterLayer, numOfLines));
         }
 
         public void AddStyledString(string text, int lyr = 0,
@@ -35,36 +54,56 @@ namespace SpaceGame
             index++;
         }
 
-        public void sortString()
+        public void SortString()
         {
             stringBitmap.Sort(CompareStringByLayerIndex);
         }
 
+        public void SortLineSkip()
+        {
+            lineSkips.Sort(CompareLineSkipByLayerIndex);
+        }
+
         public void ClearStringBitmap()
         {
+            index = 0;
+            lineSkips.Clear();
             stringBitmap.Clear();
         }
 
         private static int CompareStringByLayerIndex(StyledString x, StyledString y)
         {
-            if(x.layer > y.layer)
+            if (x.layer > y.layer)
             {
                 return 1;
             }
-            if(x.layer < y.layer)
+            if (x.layer < y.layer)
             {
                 return -1;
             }
-            if(x.index > y.index)
+            if (x.index > y.index)
             {
                 return 1;
             }
-            if(x.index < y.index)
+            if (x.index < y.index)
             {
                 return -1;
             }
             return 0;
-            
+
+        }
+
+        private static int CompareLineSkipByLayerIndex(LineSkip x, LineSkip y)
+        {
+            if(x.afterLayer>y.afterLayer)
+            {
+                return 1;
+            }
+            if(x.afterLayer<y.afterLayer)
+            {
+                return -1;
+            }
+            return 0;
         }
     }
 }

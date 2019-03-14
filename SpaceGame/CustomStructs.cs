@@ -39,4 +39,15 @@ namespace SpaceGame
         }
     }
 
+    public struct LineSkip
+    {
+        public int afterLayer, numOfLines;
+
+        public LineSkip(int _afterLayer, int _numOfLines)
+        {
+            afterLayer = _afterLayer;
+            numOfLines = _numOfLines;
+        }
+    }
+
 }
