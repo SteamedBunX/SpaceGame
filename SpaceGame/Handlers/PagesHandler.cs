@@ -16,23 +16,8 @@ namespace SpaceGame
 
         public Pages MainMenu()
         {
-            Console.WriteLine("Please select your page :\n" +
-                "1: Starting a new Game\n" +
-                "2: Load Save File\n" +
-                "3: Credits");
-
-
-
-            string choice = Console.ReadLine();
-            switch(choice)
-            {
-                case "1":
-                    return Pages.NewCharacter;
-                case "2":
-                    return Pages.LoadSave;
-                case "3":
-                    return Pages.Credits;
-            }
+            MenuHandlers m = new MenuHandlers();
+            m.MainPageMenu();
             return Pages.MainMenu;
         }
 
