@@ -17,6 +17,7 @@ namespace SpaceGame
 
         public void PrintStringBitmap()
         {
+            Console.Clear();
             lineSkips.Sort(CompareLineSkipByLayerIndex);
             SortString();
             StringRenderer.PrintStringBitmap(lineSkips, stringBitmap);

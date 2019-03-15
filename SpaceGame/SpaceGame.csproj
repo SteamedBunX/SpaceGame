@@ -55,6 +55,7 @@
     <Compile Include="CustomStructs.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Game.cs" />
+    <Compile Include="GameObjects\StringData.cs" />
     <Compile Include="Renderer\ImageRenderer.cs" />
     <Compile Include="Renderer\MenuRenderer.cs" />
     <Compile Include="Renderer\StringRenderer.cs" />

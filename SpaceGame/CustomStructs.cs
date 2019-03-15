@@ -61,6 +61,16 @@ namespace SpaceGame
         }
     }
 
+    public struct DataString
+    {
+        public string text;
+        public int index;
+        public DataString(int _index, string input)
+        {
+            index = _index;
+            text = input;
+        }
+    }
 
 
 }
