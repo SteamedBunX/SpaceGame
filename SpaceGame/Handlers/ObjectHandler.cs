@@ -17,6 +17,16 @@ namespace SpaceGame
 
         public void Ini()
         {
+
+        }
+
+        public void Load()
+        {
+
+        }
+
+        public void NewSave()
+        {
             GenerateRandomAsset();
             Console.Write("Please enter your player's name: ");
             string playerName = Console.ReadLine();

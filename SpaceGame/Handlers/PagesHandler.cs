@@ -43,6 +43,13 @@ namespace SpaceGame
 
         internal Pages TestPage()
         {
+            StringHandler sh = new StringHandler();
+            sh.AddStyledString("The Space GAME~~~~~", lyr: 1, alignment: TextAlignment.Centered);
+            sh.AddStyledString("Made by 2 men team~~~~~~~~", lyr: 1, alignment: TextAlignment.Centered);
+            sh.InsertLineSkip(0, 15);
+            sh.PrintStringBitmap();
+
+
             MenuHandlers m = new MenuHandlers();
             m.TestMenu();
             return Pages.TestPage;

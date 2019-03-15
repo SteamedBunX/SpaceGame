@@ -8,6 +8,7 @@ namespace SpaceGame
 {
     class Menu
     {
+        int currentSelection = 1;
         public bool hasTitle = false;
         public bool hasBorder = false;
         public bool hasBG = false;
@@ -31,6 +32,11 @@ namespace SpaceGame
                 title = _title;
                 hasTitle = true;
             }
+        }
+
+        public void SetEntryPoint(int index)
+        {
+            currentSelection = index;
         }
 
         public void SetBG(XYPair size, Coordi position)
@@ -102,6 +108,26 @@ namespace SpaceGame
         public void Select(int index)
         {
             menuItems[index].Select();
+        }
+
+        public void ItemUp()
+        {
+            if (currentSelection > 1)
+            {
+                Unselect(currentSelection - 1);
+                currentSelection--;
+                Select(currentSelection - 1);
+            }
+        }
+
+        public void ItemDown()
+        {
+            if (currentSelection < menuItems.Count)
+            {
+                Unselect(currentSelection - 1);
+                currentSelection++;
+                Select(currentSelection - 1);
+            }
         }
     }
 }

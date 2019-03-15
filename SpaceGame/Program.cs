@@ -78,7 +78,6 @@ namespace SpaceGame
 
                     newInfo.FontWeight = 700;
                     SetCurrentConsoleFontEx(hnd, false, ref newInfo);
-                    Console.WriteLine($"{fontSize.X}, {fontSize.Y}");
                 }
             }
         }
@@ -113,6 +112,10 @@ namespace SpaceGame
                 );
 
         }
+
+
+
+
 
 
 
@@ -163,7 +166,6 @@ namespace SpaceGame
             Rectangle resolution = Screen.PrimaryScreen.Bounds;
             short width = (short)(resolution.Height / 50 / 2);
             short height = (short)(resolution.Height / 50);
-            Console.Write($"{width}, {height}");
             SetConsoleFont(width, height, "Consolas");
             IntPtr hConsole = DllImports.GetStdHandle(-11);   // get console handle
             DllImports.COORD xy = new DllImports.COORD(100, 100);

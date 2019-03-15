@@ -15,29 +15,11 @@ namespace SpaceGame
         List<StyledString> stringBitmap = new List<StyledString>();
         List<StyledString> augmentingBitmap = new List<StyledString>();
 
-        public void Print()
+        public void PrintStringBitmap()
         {
+            lineSkips.Sort(CompareLineSkipByLayerIndex);
             SortString();
-            SortLineSkip();
-            List<LineSkip> lineSkipsTemp = new List<LineSkip>(lineSkips);
-            foreach (StyledString s in stringBitmap)
-            {
-                if (lineSkipsTemp.Count > 0)
-                {
-                    if (s.layer > lineSkipsTemp[0].afterLayer)
-                    {
-                        for (int i = 0; i < lineSkipsTemp[0].numOfLines; i++)
-                        {
-                            Console.WriteLine();
-                        }
-                        lineSkipsTemp.RemoveAt(0);
-                    }
-                }
-                
-                Console.BackgroundColor = s.backGroundColor;
-                Console.ForegroundColor = s.textColor;
-                Console.Write(s.text);
-            }
+            StringRenderer.PrintStringBitmap(lineSkips, stringBitmap);
         }
 
         public void InsertLineSkip(int afterLayer, int numOfLines)

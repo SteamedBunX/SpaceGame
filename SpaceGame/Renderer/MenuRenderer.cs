@@ -39,6 +39,7 @@ namespace SpaceGame
                 }
             }
             Console.ResetColor();
+            Console.CursorVisible = false;
         }
 
         public static void PrintSelectedMenuItem(int currentRow, int middleColumn, MenuItem item)
@@ -46,15 +47,15 @@ namespace SpaceGame
             switch (item.alignment)
             {
                 case TextAlignment.LeftAligned:
-                    StringRenderer.printAugmentingString(new XYPair(currentRow, 0),
+                    StringRenderer.PrintAugmentingString(new XYPair(currentRow, 0),
                          Color.White, Color.Black, item.itemName);
                     break;
                 case TextAlignment.Centered:
-                    StringRenderer.printAugmentingString(new XYPair(currentRow, middleColumn - item.itemName.Length / 2),
+                    StringRenderer.PrintAugmentingString(new XYPair(currentRow, middleColumn - item.itemName.Length / 2),
                          Color.White, Color.Black, item.itemName);
                     break;
                 case TextAlignment.RightAligned:
-                    StringRenderer.printAugmentingString(new XYPair(currentRow, middleColumn * 2 - item.itemName.Length),
+                    StringRenderer.PrintAugmentingString(new XYPair(currentRow, middleColumn * 2 - item.itemName.Length),
                          Color.White, Color.Black, item.itemName);
                     break;
                 default:
@@ -67,15 +68,15 @@ namespace SpaceGame
             switch (item.alignment)
             {
                 case TextAlignment.LeftAligned:
-                    StringRenderer.printAugmentingString(new XYPair(currentRow, 0),
+                    StringRenderer.PrintAugmentingString(new XYPair(currentRow, 0),
                          Color.Black, Color.White, item.itemName);
                     break;
                 case TextAlignment.Centered:
-                    StringRenderer.printAugmentingString(new XYPair(currentRow, middleColumn - item.itemName.Length / 2),
+                    StringRenderer.PrintAugmentingString(new XYPair(currentRow, middleColumn - item.itemName.Length / 2),
                          Color.Black, Color.White, item.itemName);
                     break;
                 case TextAlignment.RightAligned:
-                    StringRenderer.printAugmentingString(new XYPair(currentRow, middleColumn * 2 - item.itemName.Length),
+                    StringRenderer.PrintAugmentingString(new XYPair(currentRow, middleColumn * 2 - item.itemName.Length),
                          Color.Black, Color.White, item.itemName);
                     break;
                 default:
