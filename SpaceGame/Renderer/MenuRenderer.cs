@@ -12,6 +12,10 @@ namespace SpaceGame
     {
         public static void PrintMenu(Menu menu)
         {
+            if (menu.hasBorder)
+            {
+                PrintBorder(menu.border);
+            }
             int currentRow = menu.firstRow;
             if (menu.style == MenuStyle.FullSize)
             {
@@ -34,6 +38,7 @@ namespace SpaceGame
                     currentRow++;
                 }
             }
+            Console.ResetColor();
         }
 
         public static void PrintSelectedMenuItem(int currentRow, int middleColumn, MenuItem item)
@@ -102,10 +107,7 @@ namespace SpaceGame
                 }
                 else
                 {
-                    for (int x = 0; x < border.sizeX; x++)
-                    {
-                        Console.Write($"║{ceilingAndFloor}║");
-                    }
+                    Console.Write($"║{middleSpace}║");
                 }
             }
         }

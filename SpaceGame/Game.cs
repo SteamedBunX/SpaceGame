@@ -24,13 +24,16 @@ namespace SpaceGame
 
             bool exit = false;
 
-            Pages pageSwitch = Pages.MainMenu;
+            Pages pageSwitch = Pages.TestPage;
             while (!exit)
             {
                 switch (pageSwitch)
                 {
                     case Pages.MainMenu:
                         pageSwitch = pgsH.MainMenu();
+                        break;
+                    case Pages.TestPage:
+                        pageSwitch = pgsH.TestPage();
                         break;
                     default:
                         pageSwitch = pgsH.MainMenu();

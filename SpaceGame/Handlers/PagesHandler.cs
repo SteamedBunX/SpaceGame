@@ -41,6 +41,11 @@ namespace SpaceGame
             return Pages.PlaceHolder;
         }
 
-
+        internal Pages TestPage()
+        {
+            MenuHandlers m = new MenuHandlers();
+            m.TestMenu();
+            return Pages.TestPage;
+        }
     }
 }

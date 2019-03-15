@@ -48,7 +48,7 @@ namespace SpaceGame
             }
         }
 
-        public void TesterMenu()
+        public void TestMenu()
         {
             XYPair bgSize = new XYPair(10, 4);
             Menu mainMenu = new Menu(30);
@@ -81,6 +81,8 @@ namespace SpaceGame
                     default:
                         break;
                 }
+
+                mainMenu.SetBorder(15);
                 MenuRenderer.PrintMenu(mainMenu);
 
             }

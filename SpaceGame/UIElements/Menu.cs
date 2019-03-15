@@ -8,13 +8,13 @@ namespace SpaceGame
 {
     class Menu
     {
-        bool hasTitle = false;
-        bool hasBorder = false;
-        bool hasBG = false;
-        Border bg;
-        Border border;
-        string title = "";
-        TextAlignment titleAlignment;
+        public bool hasTitle = false;
+        public bool hasBorder = false;
+        public bool hasBG = false;
+        public Border bg;
+        public Border border;
+        public string title = "";
+        public TextAlignment titleAlignment;
         public int firstRow, columnStart, columnWidth;
         public MenuStyle style;
         public List<MenuItem> menuItems = new List<MenuItem>();
@@ -42,6 +42,7 @@ namespace SpaceGame
         public void SetBG(int lineSize)
         {
             hasBG = true;
+            columnWidth = lineSize;
             XYPair size = new XYPair(lineSize, menuItems.Count);
             int startingColumn = style == MenuStyle.FullSize ? (Console.WindowWidth - columnWidth) / 2 : columnStart + columnWidth / 2;
             Coordi position = new Coordi(startingColumn,firstRow);
@@ -56,9 +57,10 @@ namespace SpaceGame
 
         public void SetBorder(int lineSize)
         {
+            columnWidth = lineSize;
             hasBorder = true;
             XYPair size = new XYPair(lineSize+2, hasTitle ? menuItems.Count+3 : menuItems.Count + 2);
-            int startingColumn = style == MenuStyle.FullSize ? (Console.WindowWidth - columnWidth) / 2 - 1: columnStart + columnWidth / 2 - 1;
+            int startingColumn = style == MenuStyle.FullSize ? (Console.WindowWidth - columnWidth) / 2 - 2: columnStart - 1;
             Coordi position = new Coordi(startingColumn, hasTitle ? firstRow - 2:firstRow - 1);
             border = new Border(size, position);
         }
@@ -72,7 +74,14 @@ namespace SpaceGame
         public void AddItem(MenuItem item)
         {
             menuItems.Add(item);
-            
+            if(!hasBorder)
+            { 
+            if (columnWidth < item.itemName.Length)
+            {
+                columnWidth = item.itemName.Length;
+            }
+            }
+
         }
 
         public void clearItems()
