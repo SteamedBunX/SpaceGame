@@ -55,6 +55,9 @@
     <Compile Include="CustomStructs.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Game.cs" />
+    <Compile Include="Renderer\ImageRenderer.cs" />
+    <Compile Include="Renderer\MenuRenderer.cs" />
+    <Compile Include="Renderer\StringRenderer.cs" />
     <Compile Include="UIElements\AugmentingStyledString.cs" />
     <Compile Include="Handlers\ImageHandler.cs" />
     <Compile Include="GameObjects\Location.cs" />
@@ -67,7 +70,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RandomAssetGenerator.cs" />
     <Compile Include="Handlers\StringHandler.cs" />
+    <Compile Include="UIElements\Border.cs" />
     <Compile Include="UIElements\Menu.cs" />
+    <Compile Include="UIElements\MenuItem.cs" />
     <Compile Include="UIElements\StyledString.cs" />
   </ItemGroup>
   <ItemGroup>

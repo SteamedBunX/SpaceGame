@@ -61,17 +61,6 @@ namespace SpaceGame
         }
     }
 
-    public struct MenuItem
-    {
-        public string itemName;
-        public MenuPart part;
-        public TextAlignment alignment;
-        public MenuItem(string _itemName, MenuPart menuPart, TextAlignment _alignment)
-        {
-            itemName = _itemName;
-            part = menuPart;
-            alignment = _alignment;
-        }
-    }
+
 
 }
