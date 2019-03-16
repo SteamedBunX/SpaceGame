@@ -14,7 +14,7 @@ namespace SpaceGame
         {
             if (menu.hasBorder)
             {
-               GraphicRenderer.PrintBorder(menu.border);
+                GraphicRenderer.PrintBorder(menu.border);
             }
             int currentRow = menu.firstRow;
             if (menu.style == BoxStyle.FullSize)
@@ -28,7 +28,7 @@ namespace SpaceGame
                             PrintMenuItem(item, currentRow, middleColumn);
                             break;
                         case MenuPart.MenuItemSelected:
-                            PrintSelectedMenuItem(currentRow, middleColumn, item);
+                            PrintSelectedMenuItem(item, currentRow, middleColumn);
                             break;
                         case MenuPart.MenuItemPrompt:
                             break;
@@ -42,46 +42,42 @@ namespace SpaceGame
             Console.CursorVisible = false;
         }
 
-        public static void PrintSelectedMenuItem(int currentRow, int middleColumn, MenuItem item)
+        public static void PrintSelectedMenuItem(MenuItem item, int currentRow, int middleColumn)
         {
+            XYPair position;
             switch (item.alignment)
             {
-                case TextAlignment.LeftAligned:
-                    StringRenderer.PrintAugmentingString(new XYPair(currentRow, 0),
-                         Color.White, Color.Black, item.itemName);
+                case Alignment.LeftAligned:
+                    position = new XYPair(0, currentRow);
                     break;
-                case TextAlignment.Centered:
-                    StringRenderer.PrintAugmentingString(new XYPair(currentRow, middleColumn - item.itemName.Length / 2),
-                         Color.White, Color.Black, item.itemName);
-                    break;
-                case TextAlignment.RightAligned:
-                    StringRenderer.PrintAugmentingString(new XYPair(currentRow, middleColumn * 2 - item.itemName.Length),
-                         Color.White, Color.Black, item.itemName);
+                case Alignment.Centered:
+                    position = new XYPair(middleColumn - item.itemName.Length / 2, currentRow);
                     break;
                 default:
+                    position = new XYPair(middleColumn * 2 - item.itemName.Length, currentRow);
                     break;
+
             }
+            StringRenderer.PrintFreeString(new FreeString(position, item.itemName, TextColor.Black, TextColor.White));
         }
 
         public static void PrintMenuItem(MenuItem item, int currentRow, int middleColumn)
         {
+            XYPair position;
             switch (item.alignment)
             {
-                case TextAlignment.LeftAligned:
-                    StringRenderer.PrintAugmentingString(new XYPair(currentRow, 0),
-                         Color.Black, Color.White, item.itemName);
+                case Alignment.LeftAligned:
+                    position = new XYPair(0, currentRow);
                     break;
-                case TextAlignment.Centered:
-                    StringRenderer.PrintAugmentingString(new XYPair(currentRow, middleColumn - item.itemName.Length / 2),
-                         Color.Black, Color.White, item.itemName);
-                    break;
-                case TextAlignment.RightAligned:
-                    StringRenderer.PrintAugmentingString(new XYPair(currentRow, middleColumn * 2 - item.itemName.Length),
-                         Color.Black, Color.White, item.itemName);
+                case Alignment.Centered:
+                    position = new XYPair(middleColumn - item.itemName.Length / 2, currentRow);
                     break;
                 default:
+                    position = new XYPair(middleColumn * 2 - item.itemName.Length, currentRow);
                     break;
+
             }
+            StringRenderer.PrintFreeString(new FreeString(position, item.itemName));
         }
 
 

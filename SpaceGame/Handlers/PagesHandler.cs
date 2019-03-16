@@ -20,6 +20,7 @@ namespace SpaceGame
 
         public Pages MainMenu()
         {
+            Console.Clear();
             int i = menuH.MainPageMenu();
             switch (i)
             {
@@ -36,23 +37,31 @@ namespace SpaceGame
 
         public Pages CreateNewData()
         {
-            objH.GenerateNewData();
-            StringHandler s = new StringHandler();
-            s.AddStyledString("What is your name?", alignment: TextAlignment.Centered, lyr:1);
-            s.InsertLineSkip(0, 25);
-            s.PrintStringBitmap();
-            s.ClearStringBitmap();
+            Console.Clear();
+            //objH.GenerateNewData();
+            FreeStringBundle fSB = new FreeStringBundle(21);
+            fSB.AddFreeString("Hello Advanturer");
+            fSB.AddFreeString("What is your name?");
+            DialogBox box = new DialogBox(20, new XYPair(24,7));
+            box.Print();
+            fSB.print();
             Console.SetCursorPosition(Console.WindowWidth / 2 - 5, Console.CursorTop + 1);
             string playerName = Console.ReadLine();
-            s.AddStyledString("What is your gender?", alignment: TextAlignment.Centered);
-            s.PrintStringBitmap();
-            s.ClearStringBitmap();
+            Console.Clear();
+            fSB.ClearContent();
+            fSB.AddFreeString($"Now tell me {playerName}");
+            fSB.AddFreeString("what is your gender?");
+            box.Print();
+            fSB.print();
+            Console.SetCursorPosition(Console.WindowWidth / 2 - 5, Console.CursorTop + 1);
             string gender = Console.ReadLine();
-            s.AddStyledString("Welcome, Adnventurer", alignment: TextAlignment.Centered);
-            s.PrintStringBitmap();
-
-
-
+            Console.Clear();
+            fSB.ClearContent();
+            fSB.AddFreeString($"Your Name is {playerName}");
+            fSB.AddFreeString($"Your Gender is {gender}");
+            box.Print();
+            fSB.print();
+            Console.ReadLine();
             return Pages.MainMenu;
         }
 
@@ -81,13 +90,7 @@ namespace SpaceGame
 
         internal Pages TestPage()
         {
-            StringHandler sh = new StringHandler();
-            sh.AddStyledString("~~~~~The Space GAME~~~~~", lyr: 1, alignment: TextAlignment.Centered);
-            sh.AddStyledString("~~~~~~~~Made by 2 men team~~~~~~~~", lyr: 1, alignment: TextAlignment.Centered);
-            sh.InsertLineSkip(0, 15);
-            sh.PrintStringBitmap();
-
-
+            FreeStringList sh = new FreeStringList();
             menuH.TestMenu();
             return Pages.TestPage;
         }

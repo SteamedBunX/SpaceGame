@@ -59,7 +59,7 @@
     <Compile Include="Renderer\GraphicRenderer.cs" />
     <Compile Include="Renderer\MenuRenderer.cs" />
     <Compile Include="Renderer\StringRenderer.cs" />
-    <Compile Include="UIElements\AugmentingStyledString.cs" />
+    <Compile Include="UIElements\FreeString.cs" />
     <Compile Include="Handlers\ImageHandler.cs" />
     <Compile Include="GameObjects\Location.cs" />
     <Compile Include="GameObjects\Planet.cs" />
@@ -70,12 +70,11 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RandomAssetGenerator.cs" />
-    <Compile Include="Handlers\StringHandler.cs" />
-    <Compile Include="UIElements\Border.cs" />
-    <Compile Include="UIElements\Dialog.cs" />
+    <Compile Include="UIElements\FreeStringList.cs" />
+    <Compile Include="UIElements\DialogBox.cs" />
+    <Compile Include="UIElements\FreeStringBundle.cs" />
     <Compile Include="UIElements\Menu.cs" />
     <Compile Include="UIElements\MenuItem.cs" />
-    <Compile Include="UIElements\StyledString.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

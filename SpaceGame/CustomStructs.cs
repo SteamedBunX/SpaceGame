@@ -72,5 +72,18 @@ namespace SpaceGame
         }
     }
 
+    public struct Border
+    {
+        public int sizeX, sizeY, positionX, positionY;
+
+        public Border(XYPair size, Coordi position)
+        {
+            sizeX = size.x;
+            sizeY = size.y;
+            positionX = position.x;
+            positionY = position.y;
+        }
+    }
+
 
 }

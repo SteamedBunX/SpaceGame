@@ -10,53 +10,27 @@ namespace SpaceGame
 {
     class StringRenderer
     {
-        public static void PrintAugmentingString(XYPair cursorPosition, Color bColor, Color fColor, string content)
+        public static void PrintFreeStrings(List<FreeString> freeStrings)
         {
-            Console.SetCursorPosition(cursorPosition.y, cursorPosition.x);
-            Console.BackgroundColor = bColor;
-            Console.ForegroundColor = fColor;
-            Console.Write(content);
-        }
-
-        public static void PrintStringBitmap(List<LineSkip> lineSkips, List<StyledString> stringBitmap)
-        {
-            List<LineSkip> lineSkipsTemp = new List<LineSkip>(lineSkips);
-            foreach (StyledString s in stringBitmap)
+            foreach(FreeString s in freeStrings)
             {
-                if (lineSkipsTemp.Count > 0)
-                {
-                    if (s.layer > lineSkipsTemp[0].afterLayer)
-                    {
-                        for (int i = 0; i < lineSkipsTemp[0].numOfLines; i++)
-                        {
-                            Console.WriteLine();
-                        }
-                        lineSkipsTemp.RemoveAt(0);
-                    }
-                }
-
-                Console.BackgroundColor = s.backGroundColor;
-                Console.ForegroundColor = s.textColor;
-                PrintLine(s);
-                Console.WriteLine();
+                PrintFreeString(s);
             }
         }
 
-        public static void PrintLine(StyledString s)
+        public static void PrintFreeString(FreeString fs)
         {
-            Console.BackgroundColor = s.backGroundColor;
-            Console.ForegroundColor = s.textColor;
-            if (s.textAlignment == TextAlignment.LeftAligned)
+            Console.SetCursorPosition(fs.GetStartingPoint().x, fs.GetStartingPoint().y);
+            Console.BackgroundColor = fs.backgroundColor;
+            Console.ForegroundColor = fs.textColor;
+            Console.Write(fs.text);
+        }
+
+        public static void PrintFreeStringBundle(FreeStringBundle fSBundle)
+        {
+            foreach(FreeString fs in fSBundle.content)
             {
-                Console.Write(s.text);
-            }else if (s.textAlignment == TextAlignment.RightAligned)
-            {
-                Console.SetCursorPosition(Console.WindowWidth - s.text.Length, Console.CursorTop);
-                Console.Write(s.text);
-            }else
-            {
-                Console.SetCursorPosition((Console.WindowWidth - s.text.Length)/2, Console.CursorTop);
-                Console.Write(s.text);
+                PrintFreeString(fs);
             }
         }
     }

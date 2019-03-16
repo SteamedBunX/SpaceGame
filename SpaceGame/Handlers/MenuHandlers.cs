@@ -19,10 +19,10 @@ namespace SpaceGame
         {
             XYPair bgSize = new XYPair(10, 4);
             Menu menu = new Menu(30);
-            menu.AddItem(new MenuItem("New Game", MenuPart.MenuItem, TextAlignment.Centered));
-            menu.AddItem(new MenuItem("Load Data", MenuPart.MenuItemSelected, TextAlignment.Centered));
-            menu.AddItem(new MenuItem("Credit", MenuPart.MenuItem, TextAlignment.Centered));
-            menu.AddItem(new MenuItem("Exit", MenuPart.MenuItem, TextAlignment.Centered));
+            menu.AddItem(new MenuItem("New Game", MenuPart.MenuItem, Alignment.Centered));
+            menu.AddItem(new MenuItem("Load Data", MenuPart.MenuItemSelected, Alignment.Centered));
+            menu.AddItem(new MenuItem("Credit", MenuPart.MenuItem, Alignment.Centered));
+            menu.AddItem(new MenuItem("Exit", MenuPart.MenuItem, Alignment.Centered));
             menu.SetEntryPoint(2);
             menu.SetBorder(20);
             while (true)
@@ -52,14 +52,14 @@ namespace SpaceGame
         {
             XYPair bgSize = new XYPair(10, 4);
             Menu testMenu = new Menu(30);
-            testMenu.AddItem(new MenuItem("Item 1", MenuPart.MenuItemSelected, TextAlignment.Centered));
-            testMenu.AddItem(new MenuItem("Item 2", MenuPart.MenuItem, TextAlignment.Centered));
-            testMenu.AddItem(new MenuItem("Item 3", MenuPart.MenuItem, TextAlignment.Centered));
-            testMenu.AddItem(new MenuItem("Item 4", MenuPart.MenuItem, TextAlignment.Centered));
-            testMenu.AddItem(new MenuItem("Item 5", MenuPart.MenuItem, TextAlignment.Centered));
-            testMenu.AddItem(new MenuItem("Item 6", MenuPart.MenuItem, TextAlignment.Centered));
-            testMenu.AddItem(new MenuItem("Item 7", MenuPart.MenuItem, TextAlignment.Centered));
-            testMenu.AddItem(new MenuItem("Item 8", MenuPart.MenuItem, TextAlignment.Centered));
+            testMenu.AddItem(new MenuItem("Item 1", MenuPart.MenuItemSelected, Alignment.Centered));
+            testMenu.AddItem(new MenuItem("Item 2", MenuPart.MenuItem, Alignment.Centered));
+            testMenu.AddItem(new MenuItem("Item 3", MenuPart.MenuItem, Alignment.Centered));
+            testMenu.AddItem(new MenuItem("Item 4", MenuPart.MenuItem, Alignment.Centered));
+            testMenu.AddItem(new MenuItem("Item 5", MenuPart.MenuItem, Alignment.Centered));
+            testMenu.AddItem(new MenuItem("Item 6", MenuPart.MenuItem, Alignment.Centered));
+            testMenu.AddItem(new MenuItem("Item 7", MenuPart.MenuItem, Alignment.Centered));
+            testMenu.AddItem(new MenuItem("Item 8", MenuPart.MenuItem, Alignment.Centered));
             testMenu.SetBorder(20);
             MenuRenderer.PrintMenu(testMenu);
             while (true)

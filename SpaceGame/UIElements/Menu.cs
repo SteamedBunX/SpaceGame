@@ -15,7 +15,7 @@ namespace SpaceGame
         public Border bg;
         public Border border;
         public string title = "";
-        public TextAlignment titleAlignment;
+        public Alignment titleAlignment;
         public int firstRow, columnStart, columnWidth;
         public BoxStyle style;
         public List<MenuItem> menuItems = new List<MenuItem>();
@@ -71,7 +71,7 @@ namespace SpaceGame
             border = new Border(size, position);
         }
 
-        public void SetTitle(string titleText, TextAlignment alignment = TextAlignment.Centered)
+        public void SetTitle(string titleText, Alignment alignment = Alignment.Centered)
         {
             title = titleText;
             titleAlignment = alignment;
