@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SpaceGame
 {
-    class Planet
+    public class Planet
     {
         string name;
         Location location;

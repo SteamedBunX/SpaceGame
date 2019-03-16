@@ -15,7 +15,6 @@ namespace SpaceGame
 
         public void Ini()
         {
-            obsH.Ini();
             pgsH = new PagesHundler(ref obsH);
         }
 

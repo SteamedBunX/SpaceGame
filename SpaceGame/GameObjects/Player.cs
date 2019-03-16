@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SpaceGame
 {
-    class Player
+    public class Player
     {
         string name;
  //       Location location;

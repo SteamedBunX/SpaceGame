@@ -8,8 +8,13 @@ using System.Drawing;
 
 namespace SpaceGame
 {
-    class MenuHandlers
+    public class MenuHandlers
     {
+        ObjectHandler objH;
+        public MenuHandlers(ref ObjectHandler _objH)
+        {
+            objH = _objH;
+        }
         public void MainPageMenu()
         {
             XYPair bgSize = new XYPair(10,4);
@@ -52,7 +57,6 @@ namespace SpaceGame
         {
             XYPair bgSize = new XYPair(10, 4);
             Menu testMenu = new Menu(30);
-            int currentSelection = 1;
             testMenu.AddItem(new MenuItem("Item 1", MenuPart.MenuItemSelected, TextAlignment.Centered));
             testMenu.AddItem(new MenuItem("Item 2", MenuPart.MenuItem, TextAlignment.Centered));
             testMenu.AddItem(new MenuItem("Item 3", MenuPart.MenuItem, TextAlignment.Centered));

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SpaceGame
 {
-    class ObjectHandler
+    public class ObjectHandler
     {
         public Pages page = new Pages();
         public List<Location> potentialPlanetLocations = new List<Location>();
@@ -15,9 +15,9 @@ namespace SpaceGame
         public Random r = new Random();
         public Player player;
 
-        public void Ini()
+        public void GenerateNewData()
         {
-
+            GenerateRandomAsset();
         }
 
         public void Load()
@@ -41,15 +41,15 @@ namespace SpaceGame
         public void GenerateRandomAsset()
         {
             RandomAssetGenerator r = new RandomAssetGenerator();
-            int radius = 4;
-            int sectionSizeX = 50;
-            int sectionSizeY = 30;
+            int radius = 7;
+            int sectionSizeX = 70;
+            int sectionSizeY = 50;
             int splitFactor = 4;
             RandomPlanetGenerationScope scope = new RandomPlanetGenerationScope(new XYPair(sectionSizeX, sectionSizeY),
                 splitFactor, radius, 40);
             potentialPlanetLocations = r.GeneratePlanetLocations(scope);
-            Console.WriteLine(potentialPlanetLocations.Count);
-            Console.ReadLine();
+
+            // BitMap for debug
             Bitmap bmp = new Bitmap((sectionSizeX + radius) * splitFactor * 10, (sectionSizeY + radius) * splitFactor * 10);
             Graphics g = Graphics.FromImage(bmp);
             foreach (Location l in potentialPlanetLocations)

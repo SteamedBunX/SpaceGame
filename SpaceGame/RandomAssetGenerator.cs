@@ -13,10 +13,28 @@ namespace SpaceGame
 
 
         // generate planet
+        public List<Planet> planets = new List<Planet>();
 
+        public List<Planet> GenerateHomePlanetSystem(List<Planet> planets)
+        {
+            List<Planet> homeSystem = new List<Planet>();
+            homeSystem.Add(new Planet(new Location(5, 5), "Earth"));
+            homeSystem.Add(new Planet(new Location(4, 3), "Mars"));
+            homeSystem.Add(new Planet(new Location(5, 4), "XCentrolStation"));
+            homeSystem.Add(new Planet(new Location(4, 5), "YoRHa"));
+            homeSystem.Add(new Planet(new Location(7, 8), "Ernasis"));
+            homeSystem.Add(new Planet(new Location(10, 10), "Alpha Centauri 3"));
+            homeSystem.Add(new Planet(new Location(0, 2), "Lisnar"));
+            homeSystem.Add(new Planet(new Location(1, 8), "Amenias"));
+            homeSystem.Add(new Planet(new Location(9, 2), "Agnesia"));
+            XYPair homesystem = new XYPair(r.Next(400), r.Next(500));
 
+            return (homeSystem);
+        }
 
         // generate location star map
+
+
         public List<Location> GeneratePlanetLocations(RandomPlanetGenerationScope scope)
         {
             int splitFactor = scope.splitFactor;
@@ -58,7 +76,6 @@ namespace SpaceGame
 
                 int nextIndex = r.Next(potentialLocations.Count-1);
                 planetLocations.Add(potentialLocations[nextIndex]);
-                Console.WriteLine(planetLocations.Last());
                 disableRadiusLocations(potentialLocations[nextIndex], potentialLocations, radius);
             }
 

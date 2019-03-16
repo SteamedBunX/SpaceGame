@@ -131,7 +131,7 @@ namespace SpaceGame
         //static void TestingDraw()
         //{
         //    Random r = new Random();
-            
+
         //    for (int i = 1; i <= 50; i++)
         //    {
         //        Console.Write("");
@@ -139,12 +139,12 @@ namespace SpaceGame
         //        {
         //            Console.BackgroundColor = (ConsoleColor)r.Next(15);
         //            Console.ForegroundColor = (ConsoleColor)r.Next(15);
-                    
+
         //            Console.Write("▀");
         //            Console.ResetColor();
         //        }
         //        Console.WriteLine(i);
-                
+
         //    }
         //    Console.ResetColor();
         //    for (int i = 1; i <= 5; i++)
@@ -170,6 +170,7 @@ namespace SpaceGame
             IntPtr hConsole = DllImports.GetStdHandle(-11);   // get console handle
             DllImports.COORD xy = new DllImports.COORD(100, 100);
             DllImports.SetConsoleDisplayMode(hConsole, 1, out xy);
+            Console.WindowWidth = Console.LargestWindowWidth;
             Console.BufferHeight = Console.LargestWindowHeight;
         }
 
