@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,7 +20,15 @@ namespace SpaceGame
 
         public Pages MainMenu()
         {
-            menuH.MainPageMenu();
+            int i = menuH.MainPageMenu();
+            switch (i)
+            {
+                case 1:
+                    return Pages.NewCharacter;
+                default:
+                    break;
+            }
+            
             return Pages.MainMenu;
         }
 
@@ -30,13 +38,22 @@ namespace SpaceGame
         {
             objH.GenerateNewData();
             StringHandler s = new StringHandler();
-            s.AddStyledString("What is your name?", alignment: TextAlignment.Centered);
+            s.AddStyledString("What is your name?", alignment: TextAlignment.Centered, lyr:1);
+            s.InsertLineSkip(0, 25);
             s.PrintStringBitmap();
-            Console.SetCursorPosition(Console.CursorTop + 1, Console.WindowWidth / 2 - 5);
+            s.ClearStringBitmap();
+            Console.SetCursorPosition(Console.WindowWidth / 2 - 5, Console.CursorTop + 1);
             string playerName = Console.ReadLine();
             s.AddStyledString("What is your gender?", alignment: TextAlignment.Centered);
+            s.PrintStringBitmap();
+            s.ClearStringBitmap();
+            string gender = Console.ReadLine();
+            s.AddStyledString("Welcome, Adnventurer", alignment: TextAlignment.Centered);
+            s.PrintStringBitmap();
 
-            return Pages.PlaceHolder;
+
+
+            return Pages.MainMenu;
         }
 
 

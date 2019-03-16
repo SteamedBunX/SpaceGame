@@ -14,10 +14,10 @@ namespace SpaceGame
         {
             if (menu.hasBorder)
             {
-                PrintBorder(menu.border);
+               GraphicRenderer.PrintBorder(menu.border);
             }
             int currentRow = menu.firstRow;
-            if (menu.style == MenuStyle.FullSize)
+            if (menu.style == BoxStyle.FullSize)
             {
                 int middleColumn = Console.WindowWidth / 2;
                 foreach (MenuItem item in menu.menuItems)
@@ -84,34 +84,7 @@ namespace SpaceGame
             }
         }
 
-        public static void PrintBorder(Border border)
-        {
-            string ceilingAndFloor = "";
-            string middleSpace = "";
-            for (int i = 0; i < border.sizeX; i++)
-            {
-                ceilingAndFloor += "═";
-                middleSpace += " ";
-            }
-            Console.SetCursorPosition(border.positionX, border.positionY);
-            for (int y = 0; y < border.sizeY; y++)
-            {
-                Console.SetCursorPosition(border.positionX, border.positionY + y);
-                if (y == 0)
-                {
-                    Console.Write($"╔{ceilingAndFloor}╗");
-                }
-                else if (y == border.sizeY - 1)
-                {
-                    Console.Write($"╚{ceilingAndFloor}╝");
 
-                }
-                else
-                {
-                    Console.Write($"║{middleSpace}║");
-                }
-            }
-        }
 
     }
 }

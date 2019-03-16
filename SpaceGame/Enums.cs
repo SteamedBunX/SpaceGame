@@ -11,6 +11,7 @@ namespace SpaceGame
     public enum TextAlignment { LeftAligned, Centered, RightAligned }
     public enum TextColor { Black, White, Red, Yellow }
     public enum MenuPart { Title, MenuItem, MenuItemSelected, MenuItemPrompt}
-    public enum MenuStyle { Limited, FullSize }
+    public enum BoxStyle { Limited, FullSize }
+    public enum BoxAlignment { LeftAligned, Centered, RightAligned, Free }
 
 }

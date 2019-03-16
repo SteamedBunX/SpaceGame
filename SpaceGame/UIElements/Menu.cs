@@ -8,7 +8,7 @@ namespace SpaceGame
 {
     class Menu
     {
-        int currentSelection = 1;
+        public int currentSelection = 1;
         public bool hasTitle = false;
         public bool hasBorder = false;
         public bool hasBG = false;
@@ -17,10 +17,10 @@ namespace SpaceGame
         public string title = "";
         public TextAlignment titleAlignment;
         public int firstRow, columnStart, columnWidth;
-        public MenuStyle style;
+        public BoxStyle style;
         public List<MenuItem> menuItems = new List<MenuItem>();
         public Menu(int row, string _title = "",
-            MenuStyle menuStyle = MenuStyle.FullSize, int start = 0, int _width = 0)
+            BoxStyle menuStyle = BoxStyle.FullSize, int start = 0, int _width = 0)
         {
             
             firstRow = row;
@@ -50,7 +50,7 @@ namespace SpaceGame
             hasBG = true;
             columnWidth = lineSize;
             XYPair size = new XYPair(lineSize, menuItems.Count);
-            int startingColumn = style == MenuStyle.FullSize ? (Console.WindowWidth - columnWidth) / 2 : columnStart + columnWidth / 2;
+            int startingColumn = style == BoxStyle.FullSize ? (Console.WindowWidth - columnWidth) / 2 : columnStart + columnWidth / 2;
             Coordi position = new Coordi(startingColumn,firstRow);
             bg = new Border(size, position);
         }
@@ -66,7 +66,7 @@ namespace SpaceGame
             columnWidth = lineSize;
             hasBorder = true;
             XYPair size = new XYPair(lineSize+2, hasTitle ? menuItems.Count+3 : menuItems.Count + 2);
-            int startingColumn = style == MenuStyle.FullSize ? (Console.WindowWidth - columnWidth) / 2 - 2: columnStart - 1;
+            int startingColumn = style == BoxStyle.FullSize ? (Console.WindowWidth - columnWidth) / 2 - 2: columnStart - 1;
             Coordi position = new Coordi(startingColumn, hasTitle ? firstRow - 2:firstRow - 1);
             border = new Border(size, position);
         }

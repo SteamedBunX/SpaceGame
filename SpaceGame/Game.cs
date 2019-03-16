@@ -23,7 +23,8 @@ namespace SpaceGame
 
             bool exit = false;
 
-            Pages pageSwitch = Pages.TestPage;
+            //Pages pageSwitch = Pages.TestPage;
+            Pages pageSwitch = Pages.MainMenu;
             while (!exit)
             {
                 switch (pageSwitch)
@@ -33,6 +34,9 @@ namespace SpaceGame
                         break;
                     case Pages.TestPage:
                         pageSwitch = pgsH.TestPage();
+                        break;
+                    case Pages.NewCharacter:
+                        pageSwitch = pgsH.CreateNewData();
                         break;
                     default:
                         pageSwitch = pgsH.MainMenu();

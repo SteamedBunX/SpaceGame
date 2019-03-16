@@ -15,40 +15,35 @@ namespace SpaceGame
         {
             objH = _objH;
         }
-        public void MainPageMenu()
+        public int MainPageMenu()
         {
-            XYPair bgSize = new XYPair(10,4);
-            Menu mainMenu = new Menu(30);
-            int currentSelection = 1;
-            mainMenu.AddItem(new MenuItem("New Game", MenuPart.MenuItemSelected, TextAlignment.Centered));
-            mainMenu.AddItem(new MenuItem("Load Save", MenuPart.MenuItem, TextAlignment.Centered));
-            mainMenu.AddItem(new MenuItem("Credit", MenuPart.MenuItem, TextAlignment.Centered));
-            mainMenu.AddItem(new MenuItem("Exit", MenuPart.MenuItem, TextAlignment.Centered));
+            XYPair bgSize = new XYPair(10, 4);
+            Menu menu = new Menu(30);
+            menu.AddItem(new MenuItem("New Game", MenuPart.MenuItem, TextAlignment.Centered));
+            menu.AddItem(new MenuItem("Load Data", MenuPart.MenuItemSelected, TextAlignment.Centered));
+            menu.AddItem(new MenuItem("Credit", MenuPart.MenuItem, TextAlignment.Centered));
+            menu.AddItem(new MenuItem("Exit", MenuPart.MenuItem, TextAlignment.Centered));
+            menu.SetEntryPoint(2);
+            menu.SetBorder(20);
             while (true)
             {
+                MenuRenderer.PrintMenu(menu);
                 var input = Console.ReadKey().Key;
                 switch (input)
                 {
                     case ConsoleKey.UpArrow:
-                        if (currentSelection > 1)
-                        {
-                            mainMenu.Unselect(currentSelection - 1);
-                            currentSelection--;
-                            mainMenu.Select(currentSelection - 1);
-                        }
+                        menu.ItemUp();
                         break;
                     case ConsoleKey.DownArrow:
-                        if (currentSelection < 4)
-                        {
-                            mainMenu.Unselect(currentSelection - 1);
-                            currentSelection++;
-                            mainMenu.Select(currentSelection - 1);
-                        }
+                        menu.ItemDown();
                         break;
+                    case ConsoleKey.Enter:
+                        return menu.currentSelection;
                     default:
                         break;
                 }
-                MenuRenderer.PrintMenu(mainMenu);
+                
+                
 
             }
         }
