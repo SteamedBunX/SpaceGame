@@ -56,6 +56,7 @@
     <Compile Include="Enums.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameObjects\StringData.cs" />
+    <Compile Include="PlanetName.cs" />
     <Compile Include="Renderer\GraphicRenderer.cs" />
     <Compile Include="Renderer\MenuRenderer.cs" />
     <Compile Include="Renderer\StringRenderer.cs" />
