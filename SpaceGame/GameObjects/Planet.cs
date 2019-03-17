@@ -8,13 +8,24 @@ namespace SpaceGame
 {
     public class Planet
     {
-        string name;
-        Location location;
+        public string name;
+        public Location location;
 //        bool generated;
         public Planet(Location l, string n)
         {
             name = n;
             location = l;
+        }
+
+        public Planet(Coordi l, string n)
+        {
+            name = n;
+            location = new Location(l);
+        }
+
+        public string GetName()
+        {
+            return name;
         }
 
         public Location GetLocation()

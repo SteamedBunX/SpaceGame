@@ -6,19 +6,20 @@ using System.Threading.Tasks;
 
 namespace SpaceGame
 {
-    class DialogBox
+    class BoundaryBox
     {
         public int width, height, x, y;
         public BoxStyle style = BoxStyle.FullSize;
         public Alignment alignment = Alignment.Centered;
-        public DialogBox(int row, int _height)
+        public int spacing;
+        public BoundaryBox(int row, int _height)
         {
             y = row;
-            width = Console.WindowWidth;
+            width = Console.WindowWidth - 1;
             height = _height;
         }
 
-        public DialogBox(Coordi position, XYPair size)
+        public BoundaryBox(Coordi position, XYPair size)
         {
             alignment = Alignment.Free;
             x = position.x;
@@ -27,12 +28,21 @@ namespace SpaceGame
             height = size.y;
         }
 
-        public DialogBox(int row, XYPair size, Alignment boxAlignment = Alignment.Centered)
+        public BoundaryBox(int row, XYPair size, Alignment boxAlignment = Alignment.Centered)
         {
             alignment = boxAlignment;
             y = row;
             width = size.x;
             height = size.y;
+        }
+
+        public BoundaryBox(int row, int rightSpacing, XYPair size, Alignment boxAlignment = Alignment.RightAligned)
+        {
+            alignment = boxAlignment;
+            y = row;
+            width = size.x;
+            height = size.y;
+            spacing = rightSpacing;
         }
 
         public void SetSize(XYPair size)
@@ -44,17 +54,20 @@ namespace SpaceGame
         public void Print()
         {
             int alignX = 0;
+            int temp;
             switch (alignment)
             {
                 case Alignment.LeftAligned:
                     GraphicRenderer.PrintBorder(new Border(new XYPair(width, height), new Coordi(0, y)));
                     break;
                 case Alignment.Centered:
-                    alignX = (Console.WindowWidth - width) / 2 - 1;
+                    temp = (Console.WindowWidth - width) / 2 - 1;
+                    alignX = temp > 0? temp : 0;
                     GraphicRenderer.PrintBorder(new Border(new XYPair(width, height), new Coordi(alignX, y)));
                     break;
                 case Alignment.RightAligned:
-                    alignX = Console.WindowWidth - width - 1;
+                    temp = (Console.WindowWidth - width) - spacing;
+                    alignX = temp > 0 ? temp : 0;
                     GraphicRenderer.PrintBorder(new Border(new XYPair(width, height), new Coordi(alignX, y)));
                     break;
                 case Alignment.Free:
@@ -63,6 +76,7 @@ namespace SpaceGame
                 default:
                     break;
             }
+            Console.CursorVisible = false;
 
         }
 

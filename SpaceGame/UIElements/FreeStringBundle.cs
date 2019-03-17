@@ -32,10 +32,12 @@ namespace SpaceGame
             int currentRow = startRow + content.Count;
             int startingPoint = startColumn;
             int width = endColumn - startColumn;
+            int temp;
             switch (alignment)
             {
                 case Alignment.Centered:
-                    startingPoint += (width - t.Count()) / 2;
+                    temp = (width - t.Count()) / 2 - 1;
+                    startingPoint += temp > 0 ? temp : 0;
                     break;
                 case Alignment.RightAligned:
                     startingPoint += width - t.Count();

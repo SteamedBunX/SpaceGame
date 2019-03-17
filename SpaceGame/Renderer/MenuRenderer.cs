@@ -51,7 +51,7 @@ namespace SpaceGame
                     position = new XYPair(0, currentRow);
                     break;
                 case Alignment.Centered:
-                    position = new XYPair(middleColumn - item.itemName.Length / 2, currentRow);
+                    position = new XYPair(middleColumn - item.itemName.Length / 2 - 1, currentRow);
                     break;
                 default:
                     position = new XYPair(middleColumn * 2 - item.itemName.Length, currentRow);
@@ -70,7 +70,7 @@ namespace SpaceGame
                     position = new XYPair(0, currentRow);
                     break;
                 case Alignment.Centered:
-                    position = new XYPair(middleColumn - item.itemName.Length / 2, currentRow);
+                    position = new XYPair(middleColumn - item.itemName.Length / 2 - 1, currentRow);
                     break;
                 default:
                     position = new XYPair(middleColumn * 2 - item.itemName.Length, currentRow);

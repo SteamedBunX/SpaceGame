@@ -8,6 +8,7 @@ namespace SpaceGame
 {
     class Menu
     {
+        public bool scrollable;
         public int currentSelection = 0;
         public bool hasTitle = false;
         public bool hasBorder = false;
@@ -16,13 +17,13 @@ namespace SpaceGame
         public Border border;
         public string title = "";
         public Alignment titleAlignment;
-        public int firstRow, columnStart, columnWidth;
+        public int firstRow, columnStart, columnWidth, maxHeight;
         public BoxStyle style;
         public List<MenuItem> menuItems = new List<MenuItem>();
         public Menu(int row, string _title = "",
-            BoxStyle menuStyle = BoxStyle.FullSize, int start = 0, int _width = 0)
+            BoxStyle menuStyle = BoxStyle.FullSize, int start = 0, int _width = 0, bool _scrollable = false)
         {
-
+            scrollable = _scrollable;
             firstRow = row;
             style = menuStyle;
             columnStart = start;
@@ -81,16 +82,6 @@ namespace SpaceGame
         public void SetBorder(XYPair size, Coordi position)
         {
             hasBorder = true;
-            border = new Border(size, position);
-        }
-
-        public void SetBorder(int lineSize)
-        {
-            columnWidth = lineSize;
-            hasBorder = true;
-            XYPair size = new XYPair(lineSize + 2, hasTitle ? menuItems.Count + 3 : menuItems.Count + 2);
-            int startingColumn = style == BoxStyle.FullSize ? (Console.WindowWidth - columnWidth) / 2 - 2 : columnStart - 1;
-            Coordi position = new Coordi(startingColumn, hasTitle ? firstRow - 2 : firstRow - 1);
             border = new Border(size, position);
         }
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SpaceGame
 {
-    public class RandomAssetGenerator
+    public class AssetGenerator
     {
         Random r = new Random();
 
@@ -41,7 +41,7 @@ namespace SpaceGame
             int gridSizeX = scope.size.x;
             int gridSizeY = scope.size.y;
             int radius = scope.radius;
-            int maxAmount = scope.maxAmount;
+            int maxAmount = scope.maxAmountPerArea;
             List <Location> planetLocations = new List<Location>();
             for(int x = 0; x < splitFactor; x++)
             {

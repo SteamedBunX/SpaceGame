@@ -14,14 +14,14 @@ namespace SpaceGame
     public struct RandomPlanetGenerationScope
     {
         public XYPair size;
-        public int splitFactor, radius, maxAmount;
+        public int splitFactor, radius, maxAmountPerArea;
 
-        public RandomPlanetGenerationScope(XYPair s, int sF, int r, int mA)
+        public RandomPlanetGenerationScope(XYPair s, int sF, int r, int maxPerArea)
         {
             size = s;
             splitFactor = sF;
             radius = r;
-            maxAmount = mA;
+            maxAmountPerArea = maxPerArea;
         }
     }
 

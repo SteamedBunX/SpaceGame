@@ -48,6 +48,23 @@ namespace SpaceGame
             SetTextColor(tColor);
             SetBackgroundColor(bColor);
             textAlignment = alignment;
+            int temp;
+            switch (alignment)
+            {
+                case Alignment.LeftAligned:
+                    x = 0;
+                    break;
+                case Alignment.Centered:
+                    temp = (Console.WindowWidth - t.Length) / 2 - 1;
+                    x = temp > 0 ? temp : 0;
+                    break;
+                case Alignment.RightAligned:
+                    temp = Console.WindowWidth - t.Length;
+                    x = temp > 0 ? temp : 0;
+                    break;
+                default:
+                    break;
+            }
             text = t;
             y = row;
         }
@@ -106,6 +123,11 @@ namespace SpaceGame
                 default:
                     break;
             }
+        }
+
+        public void Print()
+        {
+            StringRenderer.PrintFreeString(this);
         }
     }
 }

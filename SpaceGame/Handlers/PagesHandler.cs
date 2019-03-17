@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace SpaceGame
 {
+    [System.Runtime.InteropServices.Guid("120EBD72-5878-464C-AABA-65DFC6F6F6DA")]
     public class PagesHundler
     {
         ObjectHandler objH;
@@ -21,7 +22,16 @@ namespace SpaceGame
         public Pages MainMenu()
         {
             Console.Clear();
-            int i = menuH.MainPageMenu();
+            Menu menu = new Menu(30);
+            menu.AddItem(new MenuItem("New Game", Alignment.Centered));
+            menu.AddItem(new MenuItem("Load Data", Alignment.Centered));
+            menu.AddItem(new MenuItem("Credit", Alignment.Centered));
+            menu.AddItem(new MenuItem("Exit", Alignment.Centered));
+            menu.SetEntryPoint(1);
+            XYPair bgSize = new XYPair(20, 6);
+            BoundaryBox box = new BoundaryBox(29, bgSize);
+            box.Print();
+            int i = menu.EnterMenuLoop();
             switch (i)
             {
                 case 0:
@@ -39,8 +49,6 @@ namespace SpaceGame
             return Pages.MainMenu;
         }
 
-
-
         public Pages CreateNewData()
         {
 
@@ -48,7 +56,7 @@ namespace SpaceGame
             FreeStringBundle fSB = new FreeStringBundle(21);
             fSB.AddFreeString("Hello Advanturer");
             fSB.AddFreeString("What is your name?");
-            DialogBox box = new DialogBox(20, new XYPair(24, 7));
+            BoundaryBox box = new BoundaryBox(20, new XYPair(24, 7));
             box.Print();
             fSB.print();
             Console.SetCursorPosition(Console.WindowWidth / 2 - 5, Console.CursorTop + 1);
@@ -59,7 +67,7 @@ namespace SpaceGame
             fSB.ClearContent();
 
             fSB.AddFreeString($"Ok, {playerName}");
-            fSB.AddFreeString("what is your gender?");
+            fSB.AddFreeString("What is your gender?");
             XYPair bgSize = new XYPair(24, 7);
             Menu menu = new Menu(24);
             menu.AddItem(new MenuItem("Male", Alignment.Centered));
@@ -67,7 +75,7 @@ namespace SpaceGame
             menu.SetEntryPoint(0);
             box.Print();
             fSB.print();
-            Gender playerGender = menu.EnterMenuLoop() == 0? Gender.Male : Gender.Female;
+            Gender playerGender = menu.EnterMenuLoop() == 0 ? Gender.Male : Gender.Female;
             box.Print();
             fSB.print();
             Console.SetCursorPosition(Console.WindowWidth / 2 - 5, Console.CursorTop + 1);
@@ -77,45 +85,65 @@ namespace SpaceGame
 
 
             Console.Clear();
+            bgSize = new XYPair(35, 7);
+            box.SetSize(bgSize);
             fSB.ClearContent();
             fSB.AddFreeString($"Your Name is {playerName}");
             fSB.AddFreeString($"Your Gender is {gender}");
+            fSB.AddFreeString($"Press Enter to find your home");
             box.Print();
             fSB.print();
             Console.ReadLine();
 
-            //objH.GenerateNewData();
-            return Pages.MainMenu;
+            objH.GenerateNewData();
+
+
+
+
+            return Pages.Ship;
         }
 
+        public Pages Ship()
+        {
+            Console.Clear();
+            TitleBox titleBox = new TitleBox("SHIP");
+            List<BoundaryBox> boxs = new List<BoundaryBox>();
+            boxs.Add(new BoundaryBox(25, new XYPair(60, 20), Alignment.RightAligned));
+            boxs.Add(new BoundaryBox(25, 60, new XYPair(60, 20), Alignment.RightAligned));
+            titleBox.Print();
+            foreach (BoundaryBox box in boxs)
+            {
+                box.Print();
+            }
 
+            Console.Read();
+
+
+            return Pages.Ship;
+        }
 
         public Pages LoadMenu()
         {
             return Pages.PlaceHolder;
         }
 
-
-
         public Pages SaveMenu()
         {
             return Pages.PlaceHolder;
         }
-
-
 
         public Pages Shop()
         {
             return Pages.PlaceHolder;
         }
 
-
-
-        internal Pages TestPage()
+        public Pages TestPage()
         {
             FreeStringList sh = new FreeStringList();
             menuH.TestMenu();
             return Pages.TestPage;
         }
+
+
     }
 }

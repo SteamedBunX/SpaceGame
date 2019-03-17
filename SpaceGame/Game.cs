@@ -21,22 +21,28 @@ namespace SpaceGame
         public void Run()
         {
 
-            //Test Entrypoint
-            //Pages pageSwitch = Pages.TestPage;
             Pages pageSwitch = Pages.MainMenu;
+            //TestEntryPoint
+            //pageSwitch = Pages.Ship;
+            //TestingEnviroment Entrypoint
+            //Pages pageSwitch = Pages.TestPage;
             while (pageSwitch != Pages.Exit)
             {
                 switch (pageSwitch)
                 {
-                    case Pages.MainMenu:
-                        pageSwitch = pgsH.MainMenu();
-                        break;
                     case Pages.TestPage:
                         pageSwitch = pgsH.TestPage();
+                        break;
+                    case Pages.MainMenu:
+                        pageSwitch = pgsH.MainMenu();
                         break;
                     case Pages.NewCharacter:
                         pageSwitch = pgsH.CreateNewData();
                         break;
+                    case Pages.Ship:
+                        pageSwitch = pgsH.Ship();
+                        break;
+
                     default:
                         pageSwitch = pgsH.MainMenu();
                         break;

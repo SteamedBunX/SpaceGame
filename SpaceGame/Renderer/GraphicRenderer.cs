@@ -13,12 +13,11 @@ namespace SpaceGame
         {
             string ceilingAndFloor = "";
             string middleSpace = "";
-            for (int i = 0; i < border.sizeX; i++)
+            for (int i = 0; i < border.sizeX - 2; i++)
             {
                 ceilingAndFloor += "═";
                 middleSpace += " ";
             }
-            Console.SetCursorPosition(border.positionX, border.positionY);
             for (int y = 0; y < border.sizeY; y++)
             {
                 Console.SetCursorPosition(border.positionX, border.positionY + y);
