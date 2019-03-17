@@ -42,13 +42,13 @@ namespace SpaceGame
             int gridSizeY = scope.size.y;
             int radius = scope.radius;
             int maxAmount = scope.maxAmountPerArea;
-            List <Location> planetLocations = new List<Location>();
-            for(int x = 0; x < splitFactor; x++)
+            List<Location> planetLocations = new List<Location>();
+            for (int x = 0; x < splitFactor; x++)
             {
-                for(int y = 0; y < splitFactor; y++)
+                for (int y = 0; y < splitFactor; y++)
                 {
-                    planetLocations.AddRange(GeneratePlanetLocationsInGridSection(x * (gridSizeX+radius),
-                        y * (gridSizeY+ radius),
+                    planetLocations.AddRange(GeneratePlanetLocationsInGridSection(x * (gridSizeX + radius),
+                        y * (gridSizeY + radius),
                         gridSizeX, gridSizeY, maxAmount, radius));
                 }
             }
@@ -74,7 +74,7 @@ namespace SpaceGame
             while ((potentialLocations.Count > 0) && planetLocations.Count < maxAmount)
             {
 
-                int nextIndex = r.Next(potentialLocations.Count-1);
+                int nextIndex = r.Next(potentialLocations.Count - 1);
                 planetLocations.Add(potentialLocations[nextIndex]);
                 disableRadiusLocations(potentialLocations[nextIndex], potentialLocations, radius);
             }
@@ -86,9 +86,9 @@ namespace SpaceGame
         {
             int cornerX = planet.getX() - radius;
             int cornerY = planet.getY() - radius;
-            for (int x = 0; x < radius*2; x++)
+            for (int x = 0; x < radius * 2; x++)
             {
-                for(int y = 0; y < radius*2; y++)
+                for (int y = 0; y < radius * 2; y++)
                 {
                     Coordi c1 = new Coordi(x, y);
                     Coordi c2 = new Coordi(radius, radius);
@@ -100,7 +100,61 @@ namespace SpaceGame
             }
         }
 
-        
+        public List<Location> EmptySpaceForHomeTown(List<Location> potentialPlanetLocations, Coordi homeTown)
+        {
+            potentialPlanetLocations.RemoveAll(l => (l.getX() > homeTown.x && l.getX() < homeTown.x + 12)
+                                                && (l.getY() > homeTown.y && l.getY() < homeTown.y + 12));
+            return potentialPlanetLocations;
+        }
+
+        public List<Planet> PopulateLocation(List<Location> potentialPlanetLocations)
+        {
+            List<Planet> randomPlanets = new List<Planet>();
+            int x = 1;
+            foreach (Location l in potentialPlanetLocations)
+            {
+                randomPlanets.Add(new Planet(l, GeneratePlanetName()));
+                x++;
+            }
+            return randomPlanets;
+        }
+
+        public List<Planet> GenerateHomeTown(Coordi homeTown)
+        {
+            int x = homeTown.x;
+            int y = homeTown.y;
+            List<Planet> homeTownPlanets = new List<Planet>();
+            homeTownPlanets.Add(new Planet(new Coordi(5 + x, 5 + y), "Earth"));
+            homeTownPlanets.Add(new Planet(new Coordi(4 + x, 3 + y), "Mars"));
+            homeTownPlanets.Add(new Planet(new Coordi(5 + x, 4 + y), "XCentrolStation"));
+            homeTownPlanets.Add(new Planet(new Coordi(4 + x, 5 + y), "YoRHa"));
+            homeTownPlanets.Add(new Planet(new Coordi(7 + x, 8 + y), "Ernasis"));
+            homeTownPlanets.Add(new Planet(new Coordi(10 + x, 10 + y), "Alpha Centauri 3"));
+            homeTownPlanets.Add(new Planet(new Coordi(0 + x, 2 + y), "Lisnar"));
+            homeTownPlanets.Add(new Planet(new Coordi(1 + x, 8 + y), "Amenias"));
+            homeTownPlanets.Add(new Planet(new Coordi(9 + x, 2 + y), "Agnesia"));
+
+            return homeTownPlanets;
+        }
+
+
+        public static string GeneratePlanetName()
+        {
+
+            var name = new StringBuilder();
+            var random = new Random();
+
+            var planetLetterIndex = ((char)('a' + random.Next(0, 26))).ToString();
+            var planetNumberIndex = random.Next(100, 999).ToString();
+
+            name = name.Append(planetLetterIndex.ToUpper());
+            name = name.Append("-");
+            name = name.Append(planetNumberIndex);
+
+            return name.ToString();
+        }
+
+
 
 
     }
