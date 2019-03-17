@@ -25,17 +25,9 @@ namespace SpaceGame
 
         }
 
-        public void NewSave()
+        public void CreateCharacter(Player p)
         {
-            GenerateRandomAsset();
-            Console.Write("Please enter your player's name: ");
-            string playerName = Console.ReadLine();
-            foreach (Location l in potentialPlanetLocations)
-            {
-                planets.Add(new Planet(l, "name"));
-            }
-            Planet currentPlanet = planets[r.Next(planets.Count - 1)];
-            player = new Player(playerName, currentPlanet);
+            player = p;
         }
 
         public void GenerateRandomAsset()

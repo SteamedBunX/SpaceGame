@@ -9,12 +9,13 @@ namespace SpaceGame
     public class Player
     {
         string name;
+        Gender gender;
  //       Location location;
         Planet currentPlanet;
-        public Player(string n, Planet p)
+        public Player(string n, Gender g)
         {
             name = n;
-            currentPlanet = p;
+            gender = g;
         }
 
         public void setPlanet(Planet p)

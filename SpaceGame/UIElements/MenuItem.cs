@@ -12,7 +12,7 @@ namespace SpaceGame
         public string itemName;
         public MenuPart menuPart;
         public Alignment alignment;
-        public MenuItem(string _itemName, MenuPart _menuPart, Alignment _alignment)
+        public MenuItem(string _itemName, Alignment _alignment = Alignment.LeftAligned, MenuPart _menuPart = MenuPart.MenuItem)
         {
             itemName = _itemName;
             menuPart = _menuPart;

@@ -21,11 +21,10 @@ namespace SpaceGame
         public void Run()
         {
 
-            bool exit = false;
-
+            //Test Entrypoint
             //Pages pageSwitch = Pages.TestPage;
             Pages pageSwitch = Pages.MainMenu;
-            while (!exit)
+            while (pageSwitch != Pages.Exit)
             {
                 switch (pageSwitch)
                 {
@@ -45,6 +44,10 @@ namespace SpaceGame
             }
 
 
+
+
+
+            // Test codes
             //while (!exit)
             //{
             //    Console.WriteLine($"You are current at the location: {obs.player.GetCurrentPlanet().GetLocation()}");

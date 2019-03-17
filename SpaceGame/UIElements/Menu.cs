@@ -8,7 +8,7 @@ namespace SpaceGame
 {
     class Menu
     {
-        public int currentSelection = 1;
+        public int currentSelection = 0;
         public bool hasTitle = false;
         public bool hasBorder = false;
         public bool hasBG = false;
@@ -22,21 +22,44 @@ namespace SpaceGame
         public Menu(int row, string _title = "",
             BoxStyle menuStyle = BoxStyle.FullSize, int start = 0, int _width = 0)
         {
-            
+
             firstRow = row;
             style = menuStyle;
             columnStart = start;
             columnWidth = _width;
-            if(_title != "")
+            if (_title != "")
             {
                 title = _title;
                 hasTitle = true;
             }
         }
 
+        public int EnterMenuLoop()
+        {
+            while (true)
+            {
+                MenuRenderer.PrintMenu(this);
+                var input = Console.ReadKey().Key;
+                switch (input)
+                {
+                    case ConsoleKey.UpArrow:
+                        ItemUp();
+                        break;
+                    case ConsoleKey.DownArrow:
+                        ItemDown();
+                        break;
+                    case ConsoleKey.Enter:
+                        return ReturnIndex();
+                    default:
+                        break;
+                }
+            }
+        }
+
         public void SetEntryPoint(int index)
         {
             currentSelection = index;
+            menuItems[index].Select();
         }
 
         public void SetBG(XYPair size, Coordi position)
@@ -51,7 +74,7 @@ namespace SpaceGame
             columnWidth = lineSize;
             XYPair size = new XYPair(lineSize, menuItems.Count);
             int startingColumn = style == BoxStyle.FullSize ? (Console.WindowWidth - columnWidth) / 2 : columnStart + columnWidth / 2;
-            Coordi position = new Coordi(startingColumn,firstRow);
+            Coordi position = new Coordi(startingColumn, firstRow);
             bg = new Border(size, position);
         }
 
@@ -65,9 +88,9 @@ namespace SpaceGame
         {
             columnWidth = lineSize;
             hasBorder = true;
-            XYPair size = new XYPair(lineSize+2, hasTitle ? menuItems.Count+3 : menuItems.Count + 2);
-            int startingColumn = style == BoxStyle.FullSize ? (Console.WindowWidth - columnWidth) / 2 - 2: columnStart - 1;
-            Coordi position = new Coordi(startingColumn, hasTitle ? firstRow - 2:firstRow - 1);
+            XYPair size = new XYPair(lineSize + 2, hasTitle ? menuItems.Count + 3 : menuItems.Count + 2);
+            int startingColumn = style == BoxStyle.FullSize ? (Console.WindowWidth - columnWidth) / 2 - 2 : columnStart - 1;
+            Coordi position = new Coordi(startingColumn, hasTitle ? firstRow - 2 : firstRow - 1);
             border = new Border(size, position);
         }
 
@@ -80,12 +103,12 @@ namespace SpaceGame
         public void AddItem(MenuItem item)
         {
             menuItems.Add(item);
-            if(!hasBorder)
-            { 
-            if (columnWidth < item.itemName.Length)
+            if (!hasBorder)
             {
-                columnWidth = item.itemName.Length;
-            }
+                if (columnWidth < item.itemName.Length)
+                {
+                    columnWidth = item.itemName.Length;
+                }
             }
 
         }
@@ -96,7 +119,7 @@ namespace SpaceGame
         }
 
         public void changeStatus(int index, MenuPart part)
-        { 
+        {
             menuItems[index].menuPart = part;
         }
 
@@ -112,22 +135,27 @@ namespace SpaceGame
 
         public void ItemUp()
         {
-            if (currentSelection > 1)
+            if (currentSelection > 0)
             {
-                Unselect(currentSelection - 1);
+                Unselect(currentSelection);
                 currentSelection--;
-                Select(currentSelection - 1);
+                Select(currentSelection);
             }
         }
 
         public void ItemDown()
         {
-            if (currentSelection < menuItems.Count)
+            if (currentSelection < menuItems.Count - 1)
             {
-                Unselect(currentSelection - 1);
+                Unselect(currentSelection);
                 currentSelection++;
-                Select(currentSelection - 1);
+                Select(currentSelection);
             }
+        }
+
+        public int ReturnIndex()
+        {
+            return currentSelection;
         }
     }
 }

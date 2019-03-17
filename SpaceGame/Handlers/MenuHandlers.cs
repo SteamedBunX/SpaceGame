@@ -19,66 +19,32 @@ namespace SpaceGame
         {
             XYPair bgSize = new XYPair(10, 4);
             Menu menu = new Menu(30);
-            menu.AddItem(new MenuItem("New Game", MenuPart.MenuItem, Alignment.Centered));
-            menu.AddItem(new MenuItem("Load Data", MenuPart.MenuItemSelected, Alignment.Centered));
-            menu.AddItem(new MenuItem("Credit", MenuPart.MenuItem, Alignment.Centered));
-            menu.AddItem(new MenuItem("Exit", MenuPart.MenuItem, Alignment.Centered));
-            menu.SetEntryPoint(2);
+            menu.AddItem(new MenuItem("New Game", Alignment.Centered));
+            menu.AddItem(new MenuItem("Load Data", Alignment.Centered));
+            menu.AddItem(new MenuItem("Credit", Alignment.Centered));
+            menu.AddItem(new MenuItem("Exit", Alignment.Centered));
+            menu.SetEntryPoint(1);
             menu.SetBorder(20);
-            while (true)
-            {
-                MenuRenderer.PrintMenu(menu);
-                var input = Console.ReadKey().Key;
-                switch (input)
-                {
-                    case ConsoleKey.UpArrow:
-                        menu.ItemUp();
-                        break;
-                    case ConsoleKey.DownArrow:
-                        menu.ItemDown();
-                        break;
-                    case ConsoleKey.Enter:
-                        return menu.currentSelection;
-                    default:
-                        break;
-                }
-                
-                
-
-            }
+            return menu.EnterMenuLoop();
         }
 
-        public void TestMenu()
+
+
+
+        public int TestMenu()
         {
             XYPair bgSize = new XYPair(10, 4);
             Menu testMenu = new Menu(30);
-            testMenu.AddItem(new MenuItem("Item 1", MenuPart.MenuItemSelected, Alignment.Centered));
-            testMenu.AddItem(new MenuItem("Item 2", MenuPart.MenuItem, Alignment.Centered));
-            testMenu.AddItem(new MenuItem("Item 3", MenuPart.MenuItem, Alignment.Centered));
-            testMenu.AddItem(new MenuItem("Item 4", MenuPart.MenuItem, Alignment.Centered));
-            testMenu.AddItem(new MenuItem("Item 5", MenuPart.MenuItem, Alignment.Centered));
-            testMenu.AddItem(new MenuItem("Item 6", MenuPart.MenuItem, Alignment.Centered));
-            testMenu.AddItem(new MenuItem("Item 7", MenuPart.MenuItem, Alignment.Centered));
-            testMenu.AddItem(new MenuItem("Item 8", MenuPart.MenuItem, Alignment.Centered));
+            testMenu.AddItem(new MenuItem("Item 1", Alignment.Centered));
+            testMenu.AddItem(new MenuItem("Item 2", Alignment.Centered));
+            testMenu.AddItem(new MenuItem("Item 3", Alignment.Centered));
+            testMenu.AddItem(new MenuItem("Item 4", Alignment.Centered));
+            testMenu.AddItem(new MenuItem("Item 5", Alignment.Centered));
+            testMenu.AddItem(new MenuItem("Item 6", Alignment.Centered));
+            testMenu.AddItem(new MenuItem("Item 7", Alignment.Centered));
+            testMenu.AddItem(new MenuItem("Item 8", Alignment.Centered));
             testMenu.SetBorder(20);
-            MenuRenderer.PrintMenu(testMenu);
-            while (true)
-            {
-                testMenu.SetBorder(20);
-                MenuRenderer.PrintMenu(testMenu);
-                var input = Console.ReadKey().Key;
-                switch (input)
-                {
-                    case ConsoleKey.UpArrow:
-                            testMenu.ItemUp();
-                        break;
-                    case ConsoleKey.DownArrow:
-                            testMenu.ItemDown();
-                        break;
-                    default:
-                        break;
-                }
-            }
+            return testMenu.EnterMenuLoop();
         }
     }
 }
