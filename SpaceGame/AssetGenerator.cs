@@ -129,8 +129,8 @@ namespace SpaceGame
             homeTownPlanets.Add(new Planet(new Coordi(5 + x, 4 + y), "XCentrolStation"));
             homeTownPlanets.Add(new Planet(new Coordi(4 + x, 5 + y), "YoRHa"));
             homeTownPlanets.Add(new Planet(new Coordi(7 + x, 8 + y), "Ernasis"));
-            homeTownPlanets.Add(new Planet(new Coordi(10 + x, 10 + y), "Alpha Centauri 3"));
-            homeTownPlanets.Add(new Planet(new Coordi(0 + x, 2 + y), "Lisnar"));
+            homeTownPlanets.Add(new Planet(new Coordi(9 + x, 9 + y), "Alpha Centauri 3"));
+            homeTownPlanets.Add(new Planet(new Coordi(1 + x, 2 + y), "Lisnar"));
             homeTownPlanets.Add(new Planet(new Coordi(1 + x, 8 + y), "Amenias"));
             homeTownPlanets.Add(new Planet(new Coordi(9 + x, 2 + y), "Agnesia"));
 

@@ -140,7 +140,14 @@ namespace SpaceGame
         public Pages TestPage()
         {
             FreeStringList sh = new FreeStringList();
-            menuH.TestMenu();
+            Menu scrollableTest = new Menu(20, 20, 10, "Shop", _width: 10,menuStyle: BoxStyle.Limited);
+            BoundaryBox box = new BoundaryBox(new Coordi(19, 19), new XYPair(15, 12));
+            for (int i = 0; i < 20; i++)
+            {
+                scrollableTest.AddItem(new MenuItem($"Shop Item {i}"));
+            }
+            box.Print();
+            scrollableTest.EnterMenuLoop();
             return Pages.TestPage;
         }
 

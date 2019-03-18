@@ -8,7 +8,8 @@ namespace SpaceGame
 {
     class Menu
     {
-        public bool scrollable;
+        public bool scrollable = false;
+        public int top = 0, end = 0;
         public int currentSelection = 0;
         public bool hasTitle = false;
         public bool hasBorder = false;
@@ -17,16 +18,18 @@ namespace SpaceGame
         public Border border;
         public string title = "";
         public Alignment titleAlignment;
+        public Alignment alignment;
         public int firstRow, columnStart, columnWidth, maxHeight;
         public BoxStyle style;
         public List<MenuItem> menuItems = new List<MenuItem>();
-        public Menu(int row, string _title = "",
-            BoxStyle menuStyle = BoxStyle.FullSize, int start = 0, int _width = 0, bool _scrollable = false)
+        public Menu(int row = 0, int column = 0, string _title = "",
+            BoxStyle menuStyle = BoxStyle.FullSize, Alignment _alignment = Alignment.Free,
+             int _width = 0)
         {
-            scrollable = _scrollable;
+            alignment = _alignment;
             firstRow = row;
             style = menuStyle;
-            columnStart = start;
+            columnStart = column;
             columnWidth = _width;
             if (_title != "")
             {
@@ -35,11 +38,37 @@ namespace SpaceGame
             }
         }
 
+        public Menu(int row, int column, int maxShown, string _title = "",
+    BoxStyle menuStyle = BoxStyle.FullSize, Alignment _alignment = Alignment.Free,
+    int _width = 0)
+        {
+            alignment = _alignment;
+            scrollable = true;
+            top = 0;
+            end = maxShown - 1;
+            maxHeight = maxShown;
+            firstRow = row;
+            style = menuStyle;
+            columnStart = column;
+            columnWidth = _width;
+            if (_title != "")
+            {
+                title = _title;
+                hasTitle = true;
+            }
+        }
+
+
+        public void Align()
+        {
+
+        }
+
         public int EnterMenuLoop()
         {
             while (true)
             {
-                MenuRenderer.PrintMenu(this);
+                Print();
                 var input = Console.ReadKey().Key;
                 switch (input)
                 {
@@ -126,16 +155,36 @@ namespace SpaceGame
 
         public void ItemUp()
         {
+            if (scrollable && top != 0)
+            {
+                if (currentSelection <= top + 1)
+                {
+                    top--;
+                    end--;
+                }
+            }
+
             if (currentSelection > 0)
             {
                 Unselect(currentSelection);
                 currentSelection--;
                 Select(currentSelection);
             }
+
+
         }
 
         public void ItemDown()
         {
+            if (scrollable && end != menuItems.Count - 1)
+            {
+                if (currentSelection > end - 1)
+                {
+                    top++;
+                    end++;
+                }
+            }
+
             if (currentSelection < menuItems.Count - 1)
             {
                 Unselect(currentSelection);
@@ -147,6 +196,40 @@ namespace SpaceGame
         public int ReturnIndex()
         {
             return currentSelection;
+        }
+
+        public void Print()
+        {
+            if (!scrollable)
+            {
+                MenuRenderer.PrintMenu(this);
+            }
+            else
+            {
+                Menu croped = new Menu(firstRow, columnStart, title, style, _width: columnWidth);
+                if (top > 0)
+                {
+                    croped.AddItem(new MenuItem(@"………", Alignment.Centered));
+                }
+                else
+                {
+                    croped.AddItem(menuItems[0]);
+                }
+                for (int i = top + 1; i < end; i++)
+                {
+                    croped.AddItem(menuItems[i]);
+                }
+                if (end < menuItems.Count - 1)
+                {
+                    croped.AddItem(new MenuItem("………", Alignment.Centered));
+                }
+                else
+                {
+                    croped.AddItem(menuItems[end]);
+                }
+                MenuRenderer.PrintMenu(croped);
+            }
+            //▲▼
         }
     }
 }

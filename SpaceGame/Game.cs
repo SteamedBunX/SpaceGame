@@ -25,7 +25,7 @@ namespace SpaceGame
             //TestEntryPoint
             //pageSwitch = Pages.Ship;
             //TestingEnviroment Entrypoint
-            //Pages pageSwitch = Pages.TestPage;
+            pageSwitch = Pages.TestPage;
             while (pageSwitch != Pages.Exit)
             {
                 switch (pageSwitch)

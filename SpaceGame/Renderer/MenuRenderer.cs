@@ -12,43 +12,49 @@ namespace SpaceGame
     {
         public static void PrintMenu(Menu menu)
         {
-            if (menu.hasBorder)
-            {
-                GraphicRenderer.PrintBorder(menu.border);
-            }
+
             int currentRow = menu.firstRow;
+            int columnStart = menu.columnStart;
+            int middleColumn = 0;
             if (menu.style == BoxStyle.FullSize)
             {
-                int middleColumn = Console.WindowWidth / 2;
-                foreach (MenuItem item in menu.menuItems)
-                {
-                    switch (item.menuPart)
-                    {
-                        case MenuPart.MenuItem:
-                            PrintMenuItem(item, currentRow, middleColumn);
-                            break;
-                        case MenuPart.MenuItemSelected:
-                            PrintSelectedMenuItem(item, currentRow, middleColumn);
-                            break;
-                        case MenuPart.MenuItemPrompt:
-                            break;
-                        default:
-                            break;
-                    }
-                    currentRow++;
-                }
+                middleColumn = Console.WindowWidth / 2;
             }
+            else
+            {
+                middleColumn = menu.columnWidth / 2 + columnStart;
+            }
+            foreach (MenuItem item in menu.menuItems)
+            {
+                PrintOver(currentRow, menu.columnStart, menu.columnWidth);
+                switch (item.menuPart)
+                {
+                    case MenuPart.MenuItem:
+                        PrintMenuItem(item, currentRow, middleColumn, menu.columnStart);
+                        break;
+                    case MenuPart.MenuItemSelected:
+                        PrintSelectedMenuItem(item, currentRow, middleColumn, menu.columnStart);
+                        break;
+                    case MenuPart.MenuItemPrompt:
+                        break;
+                    default:
+                        break;
+                }
+                currentRow++;
+            }
+
+
             Console.ResetColor();
             Console.CursorVisible = false;
         }
 
-        public static void PrintSelectedMenuItem(MenuItem item, int currentRow, int middleColumn)
+        public static void PrintSelectedMenuItem(MenuItem item, int currentRow, int middleColumn, int startColumn)
         {
             XYPair position;
             switch (item.alignment)
             {
                 case Alignment.LeftAligned:
-                    position = new XYPair(0, currentRow);
+                    position = new XYPair(startColumn, currentRow);
                     break;
                 case Alignment.Centered:
                     position = new XYPair(middleColumn - item.itemName.Length / 2 - 1, currentRow);
@@ -61,13 +67,25 @@ namespace SpaceGame
             StringRenderer.PrintFreeString(new FreeString(position, item.itemName, TextColor.Black, TextColor.White));
         }
 
-        public static void PrintMenuItem(MenuItem item, int currentRow, int middleColumn)
+        public static void PrintOver(int currentRow, int columnStart, int length)
+        {
+            Console.SetCursorPosition(columnStart, currentRow);
+            Console.BackgroundColor = Color.Black;
+            string blank = "";
+            for (int i = 0; i < length; i++)
+            {
+                blank += " ";
+            }
+            Console.Write(blank);
+        }
+
+        public static void PrintMenuItem(MenuItem item, int currentRow, int middleColumn, int startColumn)
         {
             XYPair position;
             switch (item.alignment)
             {
                 case Alignment.LeftAligned:
-                    position = new XYPair(0, currentRow);
+                    position = new XYPair(startColumn, currentRow);
                     break;
                 case Alignment.Centered:
                     position = new XYPair(middleColumn - item.itemName.Length / 2 - 1, currentRow);
