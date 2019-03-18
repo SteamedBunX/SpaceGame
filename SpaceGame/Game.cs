@@ -15,17 +15,17 @@ namespace SpaceGame
 
         public void Ini()
         {
+            obsH.loadImages();
             pgsH = new PagesHundler(ref obsH);
         }
 
         public void Run()
         {
-
             Pages pageSwitch = Pages.MainMenu;
             //TestEntryPoint
             //pageSwitch = Pages.Ship;
             //TestingEnviroment Entrypoint
-            pageSwitch = Pages.TestPage;
+            //pageSwitch = Pages.TestPage;
             while (pageSwitch != Pages.Exit)
             {
                 switch (pageSwitch)

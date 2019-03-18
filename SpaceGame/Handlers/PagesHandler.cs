@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,15 +23,16 @@ namespace SpaceGame
         public Pages MainMenu()
         {
             Console.Clear();
-            Menu menu = new Menu(30);
+            Menu menu = new Menu(36);
             menu.AddItem(new MenuItem("New Game", Alignment.Centered));
             menu.AddItem(new MenuItem("Load Data", Alignment.Centered));
             menu.AddItem(new MenuItem("Credit", Alignment.Centered));
             menu.AddItem(new MenuItem("Exit", Alignment.Centered));
             menu.SetEntryPoint(1);
             XYPair bgSize = new XYPair(20, 6);
-            BoundaryBox box = new BoundaryBox(29, bgSize);
+            BoundaryBox box = new BoundaryBox(35, bgSize);
             box.Print();
+            objH.printImage(new Coordi(35, 5), "Logo.ci");
             int i = menu.EnterMenuLoop();
             switch (i)
             {
@@ -139,6 +141,11 @@ namespace SpaceGame
 
         public Pages TestPage()
         {
+            objH.printImage(new Coordi(40,5),"Logo.ci");
+
+
+
+
             FreeStringList sh = new FreeStringList();
             Menu scrollableTest = new Menu(20, 20, 10, "Shop", _width: 10,menuStyle: BoxStyle.Limited);
             BoundaryBox box = new BoundaryBox(new Coordi(19, 19), new XYPair(15, 12));

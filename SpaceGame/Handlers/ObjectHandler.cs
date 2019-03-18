@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -9,10 +10,22 @@ namespace SpaceGame
 {
     public class ObjectHandler
     {
+        public ImageHandler images = new ImageHandler();
         public Pages page = new Pages();
         public List<Planet> planets = new List<Planet>();
         public Random r = new Random();
         public Player player;
+
+        public void loadImages()
+        {
+            string imageFolderPath = Environment.CurrentDirectory + @"\Images\";
+            images.LoadImages(imageFolderPath);
+        }
+
+        public void printImage(Coordi position, string imageName)
+        {
+            images.Print(position, imageName);
+        }
 
         public void GenerateNewData()
         {

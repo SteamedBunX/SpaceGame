@@ -14,7 +14,7 @@
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -56,6 +56,11 @@
     <Compile Include="Enums.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameObjects\StringData.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Renderer\GraphicRenderer.cs" />
     <Compile Include="Renderer\MenuRenderer.cs" />
     <Compile Include="Renderer\StringRenderer.cs" />
@@ -73,16 +78,26 @@
     <Compile Include="UIElements\FreeStringList.cs" />
     <Compile Include="UIElements\BoundaryBox.cs" />
     <Compile Include="UIElements\FreeStringBundle.cs" />
+    <Compile Include="UIElements\Image.cs" />
     <Compile Include="UIElements\Menu.cs" />
     <Compile Include="UIElements\MenuItem.cs" />
     <Compile Include="UIElements\TitleBox.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Images\Logo.ci">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\Pikachu.ci">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Images\" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
