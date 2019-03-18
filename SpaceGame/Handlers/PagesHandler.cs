@@ -32,7 +32,7 @@ namespace SpaceGame
             XYPair bgSize = new XYPair(20, 6);
             BoundaryBox box = new BoundaryBox(35, bgSize);
             box.Print();
-            objH.printImage(new Coordi(35, 5), "Logo.ci");
+            objH.printImage(new Coordi(35, 5), "Logo");
             int i = menu.EnterMenuLoop();
             switch (i)
             {

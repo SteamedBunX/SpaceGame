@@ -24,6 +24,7 @@ namespace SpaceGame
 
         public void printImage(Coordi position, string imageName)
         {
+            
             images.Print(position, imageName);
         }
 

@@ -22,8 +22,17 @@ namespace SpaceGame
 
         public void Print(Coordi position, string imageName)
         {
-            Image imageSelected = images.FirstOrDefault(l => (l.name == imageName));
-            GraphicRenderer.PrintImage(position,imageSelected);
+            int index = images.FindIndex(f => f.name == imageName);
+            if (index >= 0)
+            {
+                Image imageSelected = images[index];
+                GraphicRenderer.PrintImage(position, imageSelected);
+            }
+            else
+            {
+                StringRenderer.PrintFreeString(new FreeString(new XYPair(position.x, position.y),
+                    $"Image: {imageName} not find", TextColor.Red, alignment: Alignment.LeftAligned));
+            }
         }
     }
 }

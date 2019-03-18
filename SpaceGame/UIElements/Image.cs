@@ -18,6 +18,7 @@ namespace SpaceGame
         {
             string[] pathParts = path.Split('\\');
             name = pathParts.Last();
+            name = name.Split('.')[0];
             ProcessImage(path);
             //C:\MSSA\Homework SLN\SpaceGame\SpaceGame\Images\Logo.ci
 
