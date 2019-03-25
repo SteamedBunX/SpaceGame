@@ -136,7 +136,7 @@ namespace SpaceGame
             int x = 1;
             foreach (XYPair l in potentialPlanetLocations)
             {
-                randomPlanets.Add(new Planet(l, GeneratePlanetName()));
+                randomPlanets.Add(new Planet(l, GeneratePlanetName(ref r)));
                 x++;
             }
             return randomPlanets;
@@ -144,14 +144,13 @@ namespace SpaceGame
 
 
 
-        public static string GeneratePlanetName()
+        public static string GeneratePlanetName(ref Random r)
         {
 
             var name = new StringBuilder();
-            var random = new Random();
 
-            var planetLetterIndex = ((char)('a' + random.Next(0, 26))).ToString();
-            var planetNumberIndex = random.Next(100, 999).ToString();
+            var planetLetterIndex = ((char)('a' + r.Next(0, 26))).ToString();
+            var planetNumberIndex = r.Next(100, 999).ToString();
 
             name = name.Append(planetLetterIndex.ToUpper());
             name = name.Append("-");

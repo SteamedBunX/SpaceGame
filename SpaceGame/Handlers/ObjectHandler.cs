@@ -12,11 +12,13 @@ namespace SpaceGame
     {
         public Random r = new Random();
         string categoryPath = Environment.CurrentDirectory + @"\Datas\Category.data";
+        public bool initiated = false;
 
         public void Ini()
         {
             LoadImages();
             LoadCategoryDatas();
+            
         }
 
         string itemPath = Environment.CurrentDirectory + @"\Datas\Item.data";
@@ -70,6 +72,7 @@ namespace SpaceGame
         public void GenerateNewData()
         {
             GenerateNewGalaxy();
+            initiated = true; 
         }
 
         public void SetPlayerCharacter(Player p)

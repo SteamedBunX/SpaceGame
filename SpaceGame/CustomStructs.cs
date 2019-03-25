@@ -17,6 +17,16 @@ namespace SpaceGame
         {
             return Math.Sqrt(Math.Pow(p1.x - p2.x, 2) + Math.Pow(p1.y - p2.y, 2));
         }
+
+        public static bool operator ==(XYPair p1, XYPair p2)
+        {
+            return (p1.x == p2.x && p1.y == p2.y);
+        }
+
+        public static bool operator !=(XYPair p1, XYPair p2)
+        {
+            return !(p1.x == p2.x && p1.y == p2.y);
+        }
     }
 
     public struct RandomPlanetGenerationScope

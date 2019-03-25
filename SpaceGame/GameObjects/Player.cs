@@ -15,9 +15,9 @@ namespace SpaceGame
         public int money;
         public List<InventoryItem> inventory = new List<InventoryItem>();
         public double wrapFactor = 1.4;
-        int fuel = 320;
+        public int fuel = 320;
         int maxFuel = 320;
-        int ageByMonth = 240;
+        public int ageByMonth = 240;
 
         public Player(string n, Gender g, ref ObjectHandler objH)
         {
@@ -91,11 +91,14 @@ namespace SpaceGame
         public List<Planet> GetPlanetWithinReach()
         {
             List<Planet> planets = new List<Planet>();
-            foreach(Planet p in objH.planets)
+            foreach (Planet p in objH.planets)
             {
-                if(p.location - currentPlanet.location < 9)
+                if (p.location - currentPlanet.location < 9)
                 {
-                    planets.Add(p);
+                    if (p.location != currentPlanet.location)
+                    {
+                        planets.Add(p);
+                    }
                 }
             }
             return planets;
@@ -107,6 +110,7 @@ namespace SpaceGame
             int fuelCost = (int)(distance * 10);
             ageByMonth += (int)(distance / GetTravelSpeed() * 12);
             fuel -= fuelCost;
+            setPlanet(planet);
         }
 
         public void refuel()

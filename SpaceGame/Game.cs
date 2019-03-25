@@ -34,6 +34,16 @@ namespace SpaceGame
             //pageSwitch = Pages.TestPage;
             while (pageSwitch != Pages.Exit)
             {
+                if (pgsH.objH.initiated == true)
+                {
+                    if (pgsH.objH.player.money < 0 ||
+                        pgsH.objH.player.fuel < 0 ||
+                        pgsH.objH.player.GetAge() > 60)
+                    {
+                        pageSwitch = pgsH.GameOver();
+                        pgsH.objH.initiated = false;
+                    }
+                }
                 switch (pageSwitch)
                 {
                     case Pages.TestPage:

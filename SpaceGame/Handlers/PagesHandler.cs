@@ -12,6 +12,7 @@ namespace SpaceGame
         public ObjectHandler objH;
         int edge = Console.LargestWindowWidth / 2 - 60;
 
+
         public PagesHundler(ref ObjectHandler _objH)
         {
             objH = _objH;
@@ -50,6 +51,17 @@ namespace SpaceGame
             return Pages.MainMenu;
         }
 
+        internal Pages GameOver()
+        {
+            Console.Clear();
+            FreeString content = new FreeString(25, "GameOver");
+            objH.Ini();
+            content.Print();
+
+            Console.ReadLine();
+            return Pages.MainMenu;
+        }
+
         public Pages CreateNewData()
         {
 
@@ -82,7 +94,7 @@ namespace SpaceGame
             Console.SetCursorPosition(Console.WindowWidth / 2 - 5, Console.CursorTop + 1);
             string gender = playerGender.ToString();
             objH.player = new Player(playerName, playerGender, ref objH);
-            objH.player.money = 500;
+            objH.player.money = 50000;
 
 
 
@@ -221,7 +233,6 @@ namespace SpaceGame
             Menu travelTo = new Menu(27, edge + 3, maxShown: 9, menuStyle: BoxStyle.Limited, width: 30);
             foreach (Planet p in planetsInReach)
             {
-                if (p != objH.player.currentPlanet) 
                 travelTo.AddItem(new MenuItem(p.name));
             }
             travelTo.SetEntryPoint(0);
@@ -233,7 +244,8 @@ namespace SpaceGame
                 double distance = planetsInReach[travelTo.ReturnIndex()].location - objH.player.currentPlanet.location;
                 string demands = objH.player.currentPlanet.demands;
                 fSBs[0].ClearContent();
-                fSBs[0].AddFreeString($"Current Selected Planet Location: {planetsInReach[travelTo.ReturnIndex()]}", alignment: Alignment.LeftAligned);
+                boxs[2].Print();
+                fSBs[0].AddFreeString($"Current Selected Planet Location: {planetsInReach[travelTo.ReturnIndex()].location}", alignment: Alignment.LeftAligned);
                 fSBs[0].AddFreeString($"Supply(s):{planetsInReach[travelTo.ReturnIndex()].supplies}", alignment: Alignment.LeftAligned);
                 fSBs[0].AddFreeString($"Demand(s):{planetsInReach[travelTo.ReturnIndex()].demands}", alignment: Alignment.LeftAligned);
                 fSBs[0].AddFreeString($"Fuel Price: {planetsInReach[travelTo.ReturnIndex()].fuelPrice}", alignment: Alignment.LeftAligned);
@@ -258,11 +270,17 @@ namespace SpaceGame
                     default:
                         break;
                 }
-                
+
 
             }
 
-            objH.player.setPlanet(planetsInReach[selection]);
+            foreach (Planet p in planetsInReach)
+            {
+
+                p.RefreshMarket(ref objH.r, objH.categoryDatas);
+            }
+
+            objH.player.Travel(planetsInReach[selection]);
 
             return Pages.Ship;
         }
@@ -368,20 +386,25 @@ namespace SpaceGame
             objH.PrintImage(new XYPair(edge + 68, 15), "ShopKeeper");
 
             Menu saleShop = new Menu(27, edge + 3, maxShown: 9, menuStyle: BoxStyle.Limited, width: 60);
+            List<ShopItem> canSale = new List<ShopItem>();
             foreach (ShopItem item in objH.player.currentPlanet.demandShop)
             {
                 if (objH.player.inventory.Any(i => i.index == item.GetIndex()))
-                saleShop.AddItem(new MenuItem(Calc.GetShopDisplay(item)));
+                {
+                    canSale.Add(item);
+                    saleShop.AddItem(new MenuItem(Calc.GetShopDisplay(item)));
+                }
             }
 
             saleShop.SetEntryPoint(0);
             int selection = saleShop.EnterMenuLoop();
 
             FreeString wouldLiketoSale = new FreeString(new XYPair(edge + 3, 38), "How many would you like to Sale?");
-            Numbers amount = new Numbers(3, new XYPair(edge + 4, 40));
+            int maxAmount = objH.player.inventory.FirstOrDefault(i => i.index == canSale[selection].GetIndex()).amount;
+            Numbers amount = new Numbers(3, new XYPair(edge + 4, 40), maxAmount);
             wouldLiketoSale.Print();
             int amountSold = amount.EnterMainLoop();
-            objH.player.Sale(objH.player.currentPlanet.demandShop[selection], amountSold);
+            objH.player.Sale(canSale[selection], amountSold);
             return Pages.Shop;
         }
 
