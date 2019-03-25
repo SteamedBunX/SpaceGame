@@ -20,7 +20,7 @@ namespace SpaceGame
             }
         }
 
-        public void Print(Coordi position, string imageName)
+        public void Print(XYPair position, string imageName)
         {
             int index = images.FindIndex(f => f.name == imageName);
             if (index >= 0)

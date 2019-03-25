@@ -15,11 +15,12 @@ namespace SpaceGame
         public BoundaryBox(int row, int _height)
         {
             y = row;
-            width = Console.WindowWidth - 1;
+            width = 120;
             height = _height;
+            x = Console.LargestWindowWidth / 2 - 60;
         }
 
-        public BoundaryBox(Coordi position, XYPair size)
+        public BoundaryBox(XYPair position, XYPair size)
         {
             alignment = Alignment.Free;
             x = position.x;
@@ -36,13 +37,13 @@ namespace SpaceGame
             height = size.y;
         }
 
-        public BoundaryBox(int row, int rightSpacing, XYPair size, Alignment boxAlignment = Alignment.RightAligned)
+        public BoundaryBox(int row, int spacing, XYPair size, Alignment boxAlignment = Alignment.RightAligned)
         {
             alignment = boxAlignment;
             y = row;
             width = size.x;
             height = size.y;
-            spacing = rightSpacing;
+            this.spacing = spacing;
         }
 
         public void SetSize(XYPair size)
@@ -58,20 +59,20 @@ namespace SpaceGame
             switch (alignment)
             {
                 case Alignment.LeftAligned:
-                    GraphicRenderer.PrintBorder(new Border(new XYPair(width, height), new Coordi(0, y)));
+                    GraphicRenderer.PrintBorder(new Border(new XYPair(width, height), new XYPair(spacing, y)));
                     break;
                 case Alignment.Centered:
                     temp = (Console.WindowWidth - width) / 2 - 1;
                     alignX = temp > 0? temp : 0;
-                    GraphicRenderer.PrintBorder(new Border(new XYPair(width, height), new Coordi(alignX, y)));
+                    GraphicRenderer.PrintBorder(new Border(new XYPair(width, height), new XYPair(alignX, y)));
                     break;
                 case Alignment.RightAligned:
-                    temp = (Console.WindowWidth - width) - spacing;
+                    temp = (Console.WindowWidth - width) - spacing-1;
                     alignX = temp > 0 ? temp : 0;
-                    GraphicRenderer.PrintBorder(new Border(new XYPair(width, height), new Coordi(alignX, y)));
+                    GraphicRenderer.PrintBorder(new Border(new XYPair(width, height), new XYPair(alignX, y)));
                     break;
                 case Alignment.Free:
-                    GraphicRenderer.PrintBorder(new Border(new XYPair(width, height), new Coordi(x, y)));
+                    GraphicRenderer.PrintBorder(new Border(new XYPair(width, height), new XYPair(x, y)));
                     break;
                 default:
                     break;

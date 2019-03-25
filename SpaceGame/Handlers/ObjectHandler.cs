@@ -10,32 +10,66 @@ namespace SpaceGame
 {
     public class ObjectHandler
     {
-        public ImageHandler images = new ImageHandler();
-        public Pages page = new Pages();
-        public List<Planet> planets = new List<Planet>();
         public Random r = new Random();
-        public Player player;
+        string categoryPath = Environment.CurrentDirectory + @"\Datas\Category.data";
 
-        public void loadImages()
+        public void Ini()
+        {
+            LoadImages();
+            LoadCategoryDatas();
+        }
+
+        string itemPath = Environment.CurrentDirectory + @"\Datas\Item.data";
+
+        public ImageHandler images = new ImageHandler();
+
+        public List<CategoryData> categoryDatas = new List<CategoryData>();
+
+        public Player player;
+        public List<Planet> planets = new List<Planet>();
+
+        public void LoadImages()
         {
             string imageFolderPath = Environment.CurrentDirectory + @"\Images\";
             images.LoadImages(imageFolderPath);
         }
 
-        public void printImage(Coordi position, string imageName)
+        public void LoadCategoryDatas()
         {
-            
+            StreamReader categories = new StreamReader(categoryPath);
+
+            do
+            {
+                string[] nextLine = categories.ReadLine().Split(':');
+                categoryDatas.Add(new CategoryData(int.Parse(nextLine[0]), nextLine[1],
+                    double.Parse(nextLine[2]), double.Parse(nextLine[3])));
+            } while (!categories.EndOfStream);
+            LoadItemDatas();
+        }
+
+        public void LoadItemDatas()
+        {
+            StreamReader items = new StreamReader(itemPath);
+
+            do
+            {
+                string[] nextLine = items.ReadLine().Split(':');
+                int categoryIndex = int.Parse(nextLine[0]);
+                categoryDatas.FirstOrDefault(c => c.index == categoryIndex).
+                    AddItem(int.Parse(nextLine[1]), nextLine[2],
+                    int.Parse(nextLine[3]), double.Parse(nextLine[4]));
+            } while (!items.EndOfStream);
+        }
+
+        public void PrintImage(XYPair position, string imageName)
+        {
+
             images.Print(position, imageName);
         }
 
         public void GenerateNewData()
         {
             GenerateNewGalaxy();
-        }
-
-        public void Load()
-        {
-
         }
 
         public void SetPlayerCharacter(Player p)
@@ -54,41 +88,64 @@ namespace SpaceGame
                 splitFactor, radius, 40);
 
             PrintGenerationInfo("Locating Planets...");
-            List<Location> potentialPlanetLocations = assetG.GeneratePlanetLocations(scope);
-            System.Threading.Thread.Sleep(2000);
+            List<XYPair> potentialPlanetLocations = assetG.GeneratePlanetLocations(scope);
+            System.Threading.Thread.Sleep(1000);
 
             PrintGenerationInfo("Locating Home Planet System...");
-            Coordi homeTownPosition = new Coordi(r.Next(50, 230), r.Next(50, 140));
+            XYPair homeTownPosition = new XYPair(r.Next(50, 230), r.Next(50, 140));
             potentialPlanetLocations = assetG.EmptySpaceForHomeTown(potentialPlanetLocations, homeTownPosition);
-            System.Threading.Thread.Sleep(2000);
+            System.Threading.Thread.Sleep(1000);
 
             PrintGenerationInfo("Acquiring HomeTown Planet Names...");
             planets.AddRange(assetG.GenerateHomeTown(homeTownPosition));
-            System.Threading.Thread.Sleep(2000);
+            System.Threading.Thread.Sleep(1000);
 
             PrintGenerationInfo("Acquiring Planet Names...");
             planets.AddRange(assetG.PopulateLocation(potentialPlanetLocations));
-            System.Threading.Thread.Sleep(2000);
+            System.Threading.Thread.Sleep(1000);
+
+            PrintGenerationInfo("Analyzing Market Data...");
+            foreach (Planet p in planets)
+            {
+                p.GenerateMarket(ref r, categoryDatas);
+                p.RefreshFuelPrice(ref r);
+            }
+            System.Threading.Thread.Sleep(1000);
 
             PrintGenerationInfo($"Locating {player.GetName()}...");
             player.setPlanet(planets.Find(p => p.GetName() == "Earth"));
-            System.Threading.Thread.Sleep(2000);
+            System.Threading.Thread.Sleep(1000);
 
 
             PrintGenerationInfo($"Generating Galaxy Map...");
             // BitMap for debug
             Bitmap bmp = new Bitmap((sectionSizeX + radius) * splitFactor * 10, (sectionSizeY + radius) * splitFactor * 10);
             Graphics g = Graphics.FromImage(bmp);
-            foreach (Location l in potentialPlanetLocations)
+            foreach (XYPair l in potentialPlanetLocations)
             {
-                g.DrawEllipse(new Pen(Color.Black, 3f),
-                    new Rectangle(new Point((l.getX() - radius) * 10, (l.getY() - radius) * 10), new Size(radius * 10, radius * 10)));
+                g.DrawEllipse(new Pen(Color.FromArgb(12,12,12), 3f),
+                    new Rectangle(new Point((l.x - radius) * 10, (l.y - radius) * 10), new Size(radius * 10, radius * 10)));
             }
+            List<String> homePlanets = new List<string> { "Earth", "Mars", "XCentrolStation", "YoRHa", "Ernasis", "Alpha Centauri 3",
+             "Lisnar", "Amenias", "Agnesia"};
+            foreach (Planet p in planets)
+            {
+                if (homePlanets.Contains(p.name))
+                {
+                    g.FillEllipse(new SolidBrush(ColorTranslator.FromHtml("#ff00ffff")), new Rectangle(new Point((p.GetLocation().x - radius) * 10, (p.GetLocation().y - radius) * 10),
+                    new Size(radius * 2, radius * 2))
+                    );
+                }
+
+            }
+
             g.Dispose();
             bmp.Save(@"C:\MSSA\Galaxy Map.PNG", System.Drawing.Imaging.ImageFormat.Png);
             bmp.Dispose();
-            PrintGenerationInfo($"Process Complete! Welcome, {player.name}.");
-            Console.ReadLine();
+            PrintGenerationInfo($"Process Complete!");
+            System.Threading.Thread.Sleep(3000);
+            PrintGenerationInfo($"Welcome, {player.name}!");
+            System.Threading.Thread.Sleep(2000);
         }
 
 

@@ -70,7 +70,7 @@ namespace SpaceGame
         public static void PrintOver(int currentRow, int columnStart, int length)
         {
             Console.SetCursorPosition(columnStart, currentRow);
-            Console.BackgroundColor = Color.Black;
+            Console.BackgroundColor = Color.FromArgb(12,12,12);
             string blank = "";
             for (int i = 0; i < length; i++)
             {
@@ -98,6 +98,28 @@ namespace SpaceGame
             StringRenderer.PrintFreeString(new FreeString(position, item.itemName));
         }
 
+        public static void PrintNumbers(Numbers numbers, int rowStart, int columnStart)
+        {
+            Console.SetCursorPosition(columnStart, rowStart);
+            for (int i = numbers.digits - 1; i >= 0; i--)
+            {
+                if (i == numbers.currentDigit)
+                {
+                    Console.BackgroundColor = Color.White;
+                    Console.ForegroundColor = Color.FromArgb(12,12,12);
+                    Console.Write(numbers.getDigit(i));
+                }
+                else
+                {
+                    Console.BackgroundColor = Color.FromArgb(12,12,12);
+                    Console.ForegroundColor = Color.White;
+                    Console.Write(numbers.getDigit(i));
+                }
+                Console.BackgroundColor = Color.FromArgb(12,12,12);
+                Console.ForegroundColor = Color.White;
+            }
+            Console.CursorVisible = false;
+        }
 
 
     }

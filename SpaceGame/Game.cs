@@ -15,7 +15,7 @@ namespace SpaceGame
 
         public void Ini()
         {
-            obsH.loadImages();
+            obsH.Ini();
             pgsH = new PagesHundler(ref obsH);
         }
 
@@ -23,7 +23,13 @@ namespace SpaceGame
         {
             Pages pageSwitch = Pages.MainMenu;
             //TestEntryPoint
+            //AssetGenerator a = new AssetGenerator();
+            //pgsH.objH = a.GetDefaultObjectHandler();
             //pageSwitch = Pages.Ship;
+            //pageSwitch = Pages.Shop;
+            //pageSwitch = Pages.Buy;
+            //pageSwitch = Pages.Inventory;
+            //pageSwitch = Pages.Travel;
             //TestingEnviroment Entrypoint
             //pageSwitch = Pages.TestPage;
             while (pageSwitch != Pages.Exit)
@@ -42,7 +48,21 @@ namespace SpaceGame
                     case Pages.Ship:
                         pageSwitch = pgsH.Ship();
                         break;
-
+                    case Pages.Shop:
+                        pageSwitch = pgsH.Shop();
+                        break;
+                    case Pages.Buy:
+                        pageSwitch = pgsH.Buy();
+                        break;
+                    case Pages.Sale:
+                        pageSwitch = pgsH.Sale();
+                        break;
+                    case Pages.Inventory:
+                        pageSwitch = pgsH.Inventory();
+                        break;
+                    case Pages.Travel:
+                        pageSwitch = pgsH.Travel();
+                        break;
                     default:
                         pageSwitch = pgsH.MainMenu();
                         break;

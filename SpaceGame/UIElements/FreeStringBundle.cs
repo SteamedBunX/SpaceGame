@@ -59,7 +59,7 @@ namespace SpaceGame
             endColumn = rightLimit;
         }
 
-        public void print()
+        public void Print()
         {
             StringRenderer.PrintFreeStringBundle(this);
         }

@@ -12,6 +12,7 @@ namespace SpaceGame
     {
         public static void PrintBorder(Border border)
         {
+            Console.BackgroundColor = Color.FromArgb(12, 12, 12); ;
             string ceilingAndFloor = "";
             string middleSpace = "";
             for (int i = 0; i < border.sizeX - 2; i++)
@@ -38,7 +39,7 @@ namespace SpaceGame
             }
         }
 
-        public static void PrintImage(Coordi position, Image image)
+        public static void PrintImage(XYPair position, Image image)
         {
             int row = position.y;
             foreach (string line in image.bitmap)
@@ -63,7 +64,7 @@ namespace SpaceGame
         {
             if (colorIndex == 0)
             {
-                Console.ForegroundColor = Color.Black;
+                Console.ForegroundColor = Color.FromArgb(12,12,12);
             }
             else if (colorIndex == 15)
             {
@@ -79,7 +80,7 @@ namespace SpaceGame
         {
             if (colorIndex == 0)
             {
-                Console.BackgroundColor = Color.Black;
+                Console.BackgroundColor = Color.FromArgb(12, 12, 12);
             }
             else if (colorIndex == 15)
             {

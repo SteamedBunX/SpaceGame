@@ -9,7 +9,7 @@ namespace SpaceGame
     class Menu
     {
         public bool scrollable = false;
-        public int top = 0, end = 0;
+        public int top = 0, end = 0, maxShown = 0;
         public int currentSelection = 0;
         public bool hasTitle = false;
         public bool hasBorder = false;
@@ -24,13 +24,18 @@ namespace SpaceGame
         public List<MenuItem> menuItems = new List<MenuItem>();
         public Menu(int row = 0, int column = 0, string _title = "",
             BoxStyle menuStyle = BoxStyle.FullSize, Alignment _alignment = Alignment.Free,
-             int _width = 0)
+             int width = 0)
         {
             alignment = _alignment;
             firstRow = row;
             style = menuStyle;
             columnStart = column;
-            columnWidth = _width;
+            if (alignment == Alignment.Centered)
+            {
+                columnStart = (Console.LargestWindowWidth - width) / 2;
+            }
+
+            columnWidth = width;
             if (_title != "")
             {
                 title = _title;
@@ -40,17 +45,22 @@ namespace SpaceGame
 
         public Menu(int row, int column, int maxShown, string _title = "",
     BoxStyle menuStyle = BoxStyle.FullSize, Alignment _alignment = Alignment.Free,
-    int _width = 0)
+    int width = 0)
         {
             alignment = _alignment;
             scrollable = true;
             top = 0;
+            this.maxShown = maxShown;
             end = maxShown - 1;
             maxHeight = maxShown;
             firstRow = row;
             style = menuStyle;
             columnStart = column;
-            columnWidth = _width;
+            if (alignment == Alignment.Centered)
+            {
+                columnStart = (Console.LargestWindowWidth - width) / 2;
+            }
+            columnWidth = width;
             if (_title != "")
             {
                 title = _title;
@@ -89,10 +99,13 @@ namespace SpaceGame
         public void SetEntryPoint(int index)
         {
             currentSelection = index;
-            menuItems[index].Select();
+            if (menuItems.Count > index)
+            {
+                menuItems[index].Select();
+            }
         }
 
-        public void SetBG(XYPair size, Coordi position)
+        public void SetBG(XYPair size, XYPair position)
         {
             hasBG = true;
             bg = new Border(size, position);
@@ -104,11 +117,11 @@ namespace SpaceGame
             columnWidth = lineSize;
             XYPair size = new XYPair(lineSize, menuItems.Count);
             int startingColumn = style == BoxStyle.FullSize ? (Console.WindowWidth - columnWidth) / 2 : columnStart + columnWidth / 2;
-            Coordi position = new Coordi(startingColumn, firstRow);
+            XYPair position = new XYPair(startingColumn, firstRow);
             bg = new Border(size, position);
         }
 
-        public void SetBorder(XYPair size, Coordi position)
+        public void SetBorder(XYPair size, XYPair position)
         {
             hasBorder = true;
             border = new Border(size, position);
@@ -155,20 +168,23 @@ namespace SpaceGame
 
         public void ItemUp()
         {
-            if (scrollable && top != 0)
+            if (!(menuItems.Count == 0))
             {
-                if (currentSelection <= top + 1)
+                if (scrollable && top != 0)
                 {
-                    top--;
-                    end--;
+                    if (currentSelection <= top + 1)
+                    {
+                        top--;
+                        end--;
+                    }
                 }
-            }
 
-            if (currentSelection > 0)
-            {
-                Unselect(currentSelection);
-                currentSelection--;
-                Select(currentSelection);
+                if (currentSelection > 0)
+                {
+                    Unselect(currentSelection);
+                    currentSelection--;
+                    Select(currentSelection);
+                }
             }
 
 
@@ -176,20 +192,23 @@ namespace SpaceGame
 
         public void ItemDown()
         {
-            if (scrollable && end != menuItems.Count - 1)
+            if (!(menuItems.Count == 0))
             {
-                if (currentSelection > end - 1)
+                if (scrollable && end != menuItems.Count - 1)
                 {
-                    top++;
-                    end++;
+                    if (currentSelection > end - 1)
+                    {
+                        top++;
+                        end++;
+                    }
                 }
-            }
 
-            if (currentSelection < menuItems.Count - 1)
-            {
-                Unselect(currentSelection);
-                currentSelection++;
-                Select(currentSelection);
+                if (currentSelection < menuItems.Count - 1)
+                {
+                    Unselect(currentSelection);
+                    currentSelection++;
+                    Select(currentSelection);
+                }
             }
         }
 
@@ -204,9 +223,13 @@ namespace SpaceGame
             {
                 MenuRenderer.PrintMenu(this);
             }
+            else if (menuItems.Count() < maxShown)
+            {
+                MenuRenderer.PrintMenu(this);
+            }
             else
             {
-                Menu croped = new Menu(firstRow, columnStart, title, style, _width: columnWidth);
+                Menu croped = new Menu(firstRow, columnStart, title, style, width: columnWidth);
                 if (top > 0)
                 {
                     croped.AddItem(new MenuItem(@"………", Alignment.Centered));
@@ -229,7 +252,7 @@ namespace SpaceGame
                 }
                 MenuRenderer.PrintMenu(croped);
             }
-            //▲▼
+
         }
     }
 }

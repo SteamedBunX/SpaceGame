@@ -55,6 +55,7 @@
     <Compile Include="CustomStructs.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Game.cs" />
+    <Compile Include="GameObjects\CategoryData.cs" />
     <Compile Include="GameObjects\StringData.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -66,7 +67,6 @@
     <Compile Include="Renderer\StringRenderer.cs" />
     <Compile Include="UIElements\FreeString.cs" />
     <Compile Include="Handlers\ImageHandler.cs" />
-    <Compile Include="GameObjects\Location.cs" />
     <Compile Include="GameObjects\Planet.cs" />
     <Compile Include="GameObjects\Player.cs" />
     <Compile Include="Handlers\MenuHandlers.cs" />
@@ -81,6 +81,8 @@
     <Compile Include="UIElements\Image.cs" />
     <Compile Include="UIElements\Menu.cs" />
     <Compile Include="UIElements\MenuItem.cs" />
+    <Compile Include="UIElements\Number.cs" />
+    <Compile Include="UIElements\Numbers.cs" />
     <Compile Include="UIElements\TitleBox.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -91,13 +93,26 @@
     <None Include="Images\Pikachu.ci">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="packages.config" />
+    <None Include="Images\ShopKeeper.ci">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Datas\Item.data">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Datas\Category.data">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

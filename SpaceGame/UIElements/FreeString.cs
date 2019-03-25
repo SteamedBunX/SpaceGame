@@ -88,7 +88,7 @@ namespace SpaceGame
             switch (tColor)
             {
                 case TextColor.Black:
-                    textColor = Color.Black;
+                    textColor = Color.FromArgb(12,12,12);
                     break;
                 case TextColor.White:
                     textColor = Color.White;
@@ -109,7 +109,7 @@ namespace SpaceGame
             switch (bColor)
             {
                 case TextColor.Black:
-                    backgroundColor = Color.Black;
+                    backgroundColor = Color.FromArgb(12,12,12);
                     break;
                 case TextColor.White:
                     backgroundColor = Color.White;

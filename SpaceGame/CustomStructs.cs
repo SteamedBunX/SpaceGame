@@ -4,10 +4,18 @@ namespace SpaceGame
     public struct XYPair
     {
         public int x, y;
-        public XYPair(int _x, int _y)
+        public XYPair(int x, int y)
         {
-            x = _x;
-            y = _y;
+            this.x = x;
+            this.y = y;
+        }
+
+        public int getX() => x;
+        public int getY() => y;
+
+        public static double operator -(XYPair p1, XYPair p2)
+        {
+            return Math.Sqrt(Math.Pow(p1.x - p2.x, 2) + Math.Pow(p1.y - p2.y, 2));
         }
     }
 
@@ -25,20 +33,6 @@ namespace SpaceGame
         }
     }
 
-    public struct Coordi
-    {
-        public int x, y;
-        public Coordi(int _x, int _y)
-        {
-            x = _x;
-            y = _y;
-        }
-        public static double operator -(Coordi c1, Coordi c2)
-        {
-            return Math.Sqrt(Math.Pow((c1.x - c2.x), 2) + Math.Pow((c1.y - c2.y), 2));
-        }
-    }
-
     public struct LineSkip
     {
         public int afterLayer, numOfLines;
@@ -47,17 +41,6 @@ namespace SpaceGame
         {
             afterLayer = _afterLayer;
             numOfLines = _numOfLines;
-        }
-    }
-
-    public struct ShopItem
-    {
-        public int index, amount, price;
-        public ShopItem(int _index, int _amount, int _price)
-        {
-            index = _index;
-            amount = _amount;
-            price = _price;
         }
     }
 
@@ -76,7 +59,7 @@ namespace SpaceGame
     {
         public int sizeX, sizeY, positionX, positionY;
 
-        public Border(XYPair size, Coordi position)
+        public Border(XYPair size, XYPair position)
         {
             sizeX = size.x;
             sizeY = size.y;
@@ -84,6 +67,104 @@ namespace SpaceGame
             positionY = position.y;
         }
     }
+
+    public struct Item
+    {
+        int index;
+        string name;
+
+        public Item(int index, string name)
+        {
+            this.index = index;
+            this.name = name;
+        }
+
+        public int GetIndex()
+        {
+            return index;
+        }
+
+        public string GetName()
+        {
+            return name;
+        }
+    }
+
+    public struct ShopItem
+    {
+        Item item;
+        int price;
+        public ShopItem(Item item, int price)
+        {
+            this.item = item;
+            this.price = price;
+        }
+
+        public void SetPrice(double inflation1 = 1.0, double inflation2 = 1.0, double inflation3 = 1.0)
+        {
+            price = (int)(price * inflation1 * inflation2 * inflation3);
+        }
+
+        public int GetIndex()
+        {
+            return item.GetIndex();
+        }
+
+        public String GetName()
+        {
+            return item.GetName();
+        }
+
+        public int GetPrice()
+        {
+            return price;
+        }
+    }
+
+    public struct ShopItemData
+    {
+        Item item;
+        int basePrice;
+        double maxInflation;
+
+        public ShopItemData(int index, string name, int basePrice, double maxInflation)
+        {
+            item = new Item(index, name);
+            this.basePrice = basePrice;
+            this.maxInflation = maxInflation;
+        }
+
+        public ShopItem GetShopItem(ref Random r)
+        {
+            int price = (int)((r.NextDouble() * (maxInflation - 1) + 1) * basePrice);
+            return new ShopItem(item, price);
+        }
+    }
+
+    public struct InventoryItem
+    {
+        public int index;
+        public int amount;
+        public string name;
+
+        public InventoryItem(int index, int amount, string name)
+        {
+            this.index = index;
+            this.amount = amount;
+            this.name = name;
+        }
+
+        public void Bought(int amount)
+        {
+            this.amount += amount;
+        }
+
+        public void Sold(int amount)
+        {
+            this.amount -= amount;
+        }
+    }
+
 
 
 }
