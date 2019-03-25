@@ -107,7 +107,7 @@ namespace SpaceGame
         public void Travel(Planet planet)
         {
             double distance = currentPlanet.location - planet.location;
-            int fuelCost = (int)(distance * 10);
+            int fuelCost = (int)(distance * 5);
             ageByMonth += (int)(distance / GetTravelSpeed() * 12);
             fuel -= fuelCost;
             setPlanet(planet);
