@@ -1,0 +1,54 @@
+123456  dkgljshakdfjghljasrt
+0123456789012345678901234567
+1234567890123456789012345678
+        12345678901234567890
+28
+28-8 = 20
+
+
+
+
+
+
+
+Color Engine Logic
+
+Black = 0
+White = 15 = f
+1-14 = 14
+enum C1-C14 ? 1-14
+%black
+#white
+1 C1
+2 C2
+3 C3
+4 C4
+5 C5
+6 C6
+7 C7
+8 C8
+9 C9
+a C10
+b C11
+c C12
+d C13
+e C14
+
+format:
+
+#ffffff
+#ffffff
+#ffffff
+#ffffff
+#ffffff
+#ffffff
+#ffffff
+#ffffff
+#ffffff
+#ffffff
+
+0000000ffabda86500000000
+0008650000fabda000bd0000
+0000865000ffa000abd00000
+000000f00ffaa86500000000
+0000000ffabda86500000000

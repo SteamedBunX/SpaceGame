@@ -1,0 +1,81 @@
+Civilized Planet:
+int index
+Point location
+string name
+bool inWar
+int safe
+int fuelCost
+enum Race race
+enum Faction faction
+double baseTaxRate
+List<item> supplys
+List<item> demands
+List<CrewMember> mercenaries
+List<BluePrint> bluePrints
+
+BluePrint:
+int FunctionIndex
+string Name
+List<Item> ResourceRequired
+int price
+
+UndevelopedPlanet:
+int index
+Point location
+string name
+enum Faction Owner
+List<Mine> mines
+List<Item> Storage
+
+Mine:
+int itemIndex
+double resourceRate
+bool hasFactory
+int factoryLevel
+
+Player:
+string Name
+Enum Gender gender
+Enum Race race
+int Age
+int Money
+enum.Faction faction
+List<CrewMember> crews
+double Reputation
+List<Item> itemInventory
+List<BluePrint> bluePrintsInventory
+Ship ship
+List<Organization> subOrganizations
+List<KeyValuePair<string, int>> flags
+int securityForce
+
+Ship:
+double fuelLevel
+double maxFuel
+List<CrewMember> shipCrews
+List<KeyValuePair<string, int>> upgrades
+double warpFactor
+double speed
+double fuelEfficiency
+double fuelCost
+
+Item:
+int index
+string name
+int amount
+int price
+
+CrewMember:
+int index
+Enum Race race
+String role
+List<Enum.Trait> trait
+int loyalty
+int currentOrganizationIndex
+int salary
+
+Orginization:
+int index
+List<CrewMember> workers
+List<UndevelopedPlanet> planets
+int crewCost

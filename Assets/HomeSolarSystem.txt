@@ -1,0 +1,18 @@
+Earth
+5,5
+Mars
+4,3
+XCentrolStation
+5, 4
+YoRHa
+4, 5
+Ernasis
+7,8
+Alpha Centauri 3
+10,10
+Lisnar
+0,2
+Amenias
+1,8
+Agnesia
+9,2

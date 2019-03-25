@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Console = Colorful.Console;
 
 namespace SpaceGame
 {
@@ -28,6 +29,7 @@ namespace SpaceGame
             //pageSwitch = Pages.Ship;
             //pageSwitch = Pages.Shop;
             //pageSwitch = Pages.Buy;
+            //pageSwitch = Pages.Sale;
             //pageSwitch = Pages.Inventory;
             //pageSwitch = Pages.Travel;
             //TestingEnviroment Entrypoint
@@ -44,6 +46,7 @@ namespace SpaceGame
                         pgsH.objH.initiated = false;
                     }
                 }
+                Console.ReplaceAllColorsWithDefaults();
                 switch (pageSwitch)
                 {
                     case Pages.TestPage:

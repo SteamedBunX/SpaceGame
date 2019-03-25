@@ -1,0 +1,8 @@
+Text Handler
+Hold and print "styledtext", setting background and forground color each turn.
+Menu Handler
+Handles menu, altering specific lines of the console, display menu, highlight select, and react to key press
+Image Handler
+Handles image, altering specific lines of the console image. 4 pixel per square.
+Image Detail Handler
+Takes the image size, Handles texts that's going to be on the right side of the image, processed last.

@@ -170,6 +170,8 @@ namespace SpaceGame
             main.AddItem(new MenuItem("Inventory", Alignment.Centered, MenuPart.MenuItem));
             //main.AddItem(new MenuItem("Upgrade", Alignment.Centered, MenuPart.MenuItem));
 
+            objH.PrintImage(new XYPair(edge + 5, 5), "Planet");
+
             int selection = main.EnterMenuLoop();
 
             switch (selection)
@@ -236,6 +238,7 @@ namespace SpaceGame
                 travelTo.AddItem(new MenuItem(p.name));
             }
             travelTo.SetEntryPoint(0);
+            objH.PrintImage(new XYPair(edge + 5, 5), "Planet");
 
             int selection = 0;
             bool done = false;
@@ -396,15 +399,24 @@ namespace SpaceGame
                 }
             }
 
-            saleShop.SetEntryPoint(0);
-            int selection = saleShop.EnterMenuLoop();
+            if (canSale.Count > 0)
+            {
+                saleShop.SetEntryPoint(0);
+                int selection = saleShop.EnterMenuLoop();
 
-            FreeString wouldLiketoSale = new FreeString(new XYPair(edge + 3, 38), "How many would you like to Sale?");
-            int maxAmount = objH.player.inventory.FirstOrDefault(i => i.index == canSale[selection].GetIndex()).amount;
-            Numbers amount = new Numbers(3, new XYPair(edge + 4, 40), maxAmount);
-            wouldLiketoSale.Print();
-            int amountSold = amount.EnterMainLoop();
-            objH.player.Sale(canSale[selection], amountSold);
+                FreeString wouldLiketoSale = new FreeString(new XYPair(edge + 3, 38), "How many would you like to Sale?");
+                int maxAmount = objH.player.inventory.FirstOrDefault(i => i.index == canSale[selection].GetIndex()).amount;
+                Numbers amount = new Numbers(3, new XYPair(edge + 4, 40), maxAmount);
+                wouldLiketoSale.Print();
+                int amountSold = amount.EnterMainLoop();
+                objH.player.Sale(canSale[selection], amountSold);
+            }
+            else
+            {
+                FreeString nothingToSale = new FreeString(new XYPair(edge + 10, 30), "You don't have anything to sale to this planet");
+                nothingToSale.Print();
+                Console.Read();
+            }
             return Pages.Shop;
         }
 

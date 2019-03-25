@@ -93,6 +93,9 @@
     <None Include="Images\Pikachu.ci">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Images\Planet.ci">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Images\ShopKeeper.ci">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
