@@ -120,31 +120,32 @@ namespace SpaceGame
             System.Threading.Thread.Sleep(1000);
 
 
-            PrintGenerationInfo($"Generating Galaxy Map...");
+
             // BitMap for debug
-            Bitmap bmp = new Bitmap((sectionSizeX + radius) * splitFactor * 10, (sectionSizeY + radius) * splitFactor * 10);
-            Graphics g = Graphics.FromImage(bmp);
-            foreach (XYPair l in potentialPlanetLocations)
-            {
-                g.DrawEllipse(new Pen(Color.FromArgb(12,12,12), 3f),
-                    new Rectangle(new Point((l.x - radius) * 10, (l.y - radius) * 10), new Size(radius * 10, radius * 10)));
-            }
-            List<String> homePlanets = new List<string> { "Earth", "Mars", "XCentrolStation", "YoRHa", "Ernasis", "Alpha Centauri 3",
-             "Lisnar", "Amenias", "Agnesia"};
-            foreach (Planet p in planets)
-            {
-                if (homePlanets.Contains(p.name))
-                {
-                    g.FillEllipse(new SolidBrush(ColorTranslator.FromHtml("#ff00ffff")), new Rectangle(new Point((p.GetLocation().x - radius) * 10, (p.GetLocation().y - radius) * 10),
-                    new Size(radius * 2, radius * 2))
-                    );
-                }
+            //PrintGenerationInfo($"Generating Galaxy Map...");
+            //Bitmap bmp = new Bitmap((sectionSizeX + radius) * splitFactor * 10, (sectionSizeY + radius) * splitFactor * 10);
+            //Graphics g = Graphics.FromImage(bmp);
+            //foreach (XYPair l in potentialPlanetLocations)
+            //{
+            //    g.DrawEllipse(new Pen(Color.FromArgb(12,12,12), 3f),
+            //        new Rectangle(new Point((l.x - radius) * 10, (l.y - radius) * 10), new Size(radius * 10, radius * 10)));
+            //}
+            //List<String> homePlanets = new List<string> { "Earth", "Mars", "XCentrolStation", "YoRHa", "Ernasis", "Alpha Centauri 3",
+            // "Lisnar", "Amenias", "Agnesia"};
+            //foreach (Planet p in planets)
+            //{
+            //    if (homePlanets.Contains(p.name))
+            //    {
+            //        g.FillEllipse(new SolidBrush(ColorTranslator.FromHtml("#ff00ffff")), new Rectangle(new Point((p.GetLocation().x - radius) * 10, (p.GetLocation().y - radius) * 10),
+            //        new Size(radius * 2, radius * 2))
+            //        );
+            //    }
 
-            }
+            //}
 
-            g.Dispose();
-            bmp.Save(@"C:\MSSA\Galaxy Map.PNG", System.Drawing.Imaging.ImageFormat.Png);
-            bmp.Dispose();
+            //g.Dispose();
+            //bmp.Save(@"C:\MSSA\Galaxy Map.PNG", System.Drawing.Imaging.ImageFormat.Png);
+            //bmp.Dispose();
             PrintGenerationInfo($"Process Complete!");
             System.Threading.Thread.Sleep(3000);
             PrintGenerationInfo($"Welcome, {player.name}!");
